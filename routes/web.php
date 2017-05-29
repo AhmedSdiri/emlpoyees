@@ -47,4 +47,9 @@ Route::post('system-management/report/search', 'ReportController@search')->name(
 Route::post('system-management/report/excel', 'ReportController@exportExcel')->name('report.excel');
 Route::post('system-management/report/pdf', 'ReportController@exportPDF')->name('report.pdf');
 
+//client
+Route::resource('client-management', 'ClientController');
+
+//Route::post('client-management/search','ClientController@search')
+
 Route::get('avatars/{name}', 'EmployeeManagementController@load');

@@ -49,6 +49,8 @@
           </ul>
         </li>
         <li><a href="{{ route('user-management.index') }}"><i class="fa fa-link"></i> <span>User management</span></a></li>
+           <li><a href="{{ route('client-management.index') }}"><i class="fa fa-link"></i> <span>Client Management</span></a></li>
+        
       </ul>
       <!-- /.sidebar-menu -->
     </section>

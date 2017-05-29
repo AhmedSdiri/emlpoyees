@@ -1,4 +1,4 @@
-@extends('employees-mgmt.base')
+@extends('clients-mgmt.base')
 
 @section('action-content')
 <div class="container">
@@ -71,7 +71,7 @@
                                 </select>
                             </div>
                         </div>
-                              <div class="form-group">
+                        <div class="form-group">
                             <label class="col-md-4 control-label">State</label>
                             <div class="col-md-6">
                                 <select class="form-control" name="state_id">
