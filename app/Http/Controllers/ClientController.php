@@ -97,7 +97,17 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $client = Client::find($id);
+        // Redirect to state list if updating state wasn't existed
+        if ($client == null || count($client) == 0) {
+            return redirect()->intended('/client-management');
+        }
+        $cities = City::all();
+        $states = State::all();
+        $countries = Country::all();
+        return view('clients-mgmt.edit', ['client' => $client, 'cities' => $cities, 'states' => $states, 'countries' => $countries
+        ]);
     }
 
     /**
@@ -120,17 +130,39 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+         Client::where('id', $id)->delete();
+         return redirect()->intended('/client-management');
     }
     public function search(Request $request) {
          $constraints = [
             'firstname' => $request['firstname'],
-            'department.name' => $request['department_name']
+              'lastname' => $request['lastname'],
+            'tel' => $request['tel']
             ];
-        $employees = $this->doSearchingQuery($constraints);
+        $clients = $this->doSearchingQuery($constraints);
         $constraints['department_name'] = $request['department_name'];
-        return view('employees-mgmt/index', ['employees' => $employees, 'searchingVals' => $constraints]);
+        return view('clients-mgmt/index', ['clients' => $clients, 'searchingVals' => $constraints]);
     }
+      private function doSearchingQuery($constraints) {
+        $query = DB::table('clients')
+        ->leftJoin('city', 'clients.city_id', '=', 'city.id')
+       
+        ->leftJoin('state', 'clients.state_id', '=', 'state.id')
+        ->leftJoin('country', 'clients.country_id', '=', 'country.id')
+       
+        ->select('clients.firstname as client_name', 'clients.*');
+        $fields = array_keys($constraints);
+        $index = 0;
+        foreach ($constraints as $constraint) {
+            if ($constraint != null) {
+                $query = $query->where($fields[$index], 'like', '%'.$constraint.'%');
+            }
+
+            $index++;
+        }
+        return $query->paginate(5);
+    }
+
      private function validateInput($request) {
         $this->validate($request, [
             'lastname' => 'required|max:60',
@@ -153,4 +185,23 @@ class ClientController extends Controller
 
         return $queryInput;
     }
+      public function load($name) {
+         $path = storage_path().'/app/avatars/'.$name;
+        if (file_exists($path)) {
+            return Response::download($path);
+        }
+    }
+   /* public function scopeSearchByKeyword($query, $keyword)
+    {
+        if ($keyword!='') {
+            $query->where(function ($query) use ($keyword) {
+                $query->where("firstname", "LIKE","%$keyword%")
+                    ->orWhere("lastname", "LIKE","%$keyword%")
+                    ->orWhere("email", "LIKE", "%$keyword%")
+                    ->orWhere("tel", "LIKE", "%$keyword%");
+                  
+            });
+        }
+        return $query;
+    }*/
 }

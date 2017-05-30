@@ -18,5 +18,23 @@ class DatabaseSeeder extends Seeder
              'lastname' => 'Mr',
              'firstname' => 'admin'
          ]);
+        
+        //clien seed
+        $limit = 33;
+        $faker = Faker\Factory::create();
+        for ($i = 0; $i < $limit; $i++) {
+         DB::table('clients')->insert([ //,
+          'firstname' => $faker->firstname,
+          'lastname' => $faker->lastname,
+          'email' => $faker->unique()->safeEmail,
+          'tel' => $faker->phoneNumber,
+          'city_id' => $faker->randomDigit,
+          'state_id' => $faker->randomDigit,
+          'country_id' => $faker->randomDigit,
+          'picture'=> $faker->imageUrl($width = 640, $height = 480),
+            ]);
+        }
+        
+      $client = factory(App\Client::class,40)->create();
     }
 }

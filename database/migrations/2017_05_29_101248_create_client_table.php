@@ -18,7 +18,7 @@ class CreateClientTable extends Migration
             $table->string('lastname', 60);
             $table->string('firstname', 60);
             $table->string('email')->unique();
-            $table->integer('tel');
+            $table->string('tel',60);
             $table->integer('city_id');
             $table->integer('state_id');
             $table->integer('country_id');
