@@ -50,5 +50,8 @@ Route::post('system-management/report/pdf', 'ReportController@exportPDF')->name(
 //client
 Route::resource('client-management', 'ClientController');
 Route::post('client-management/search', 'ClientController@search')->name('client-management.search');
+//Route::get('client-management.edit', 'ClientController@edit');
+//devis
+Route::resource('devis-management', 'DevisController');
 
 Route::get('avatars/{name}', 'EmployeeManagementController@load');

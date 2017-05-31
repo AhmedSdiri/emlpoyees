@@ -55,15 +55,14 @@
                   <td class="hidden-xs">{{ $client->city_id }}</td>
                   <td class="hidden-xs">{{ $client->state_id }}</td>
                   <td class="hidden-xs">{{ $client->country_id }}</td>
-                  
-                  <td>
+               <td>
                     <form class="row" method="POST" action="{{ route('client-management.destroy', ['id' => $client->id]) }}" onsubmit = "return confirm('Are you sure?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <a href="{{ route('client-management.edit', ['id' => $client->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
                         Update
                         </a>
-                         <button type="submit" class="btn btn-danger col-sm-3 col-xs-5 btn-margin">
+                         <button type="submit" class="btn btn-danger btn-xs col-sm-3 col-xs-5 btn-margin">
                           Delete
                         </button>
                     </form>
