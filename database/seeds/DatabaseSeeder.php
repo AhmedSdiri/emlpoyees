@@ -61,8 +61,30 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         
+        //city
+        for ($i = 0; $i < $limit; $i++) {
         
+        DB::table('city')->insert([ //,
+          'name' => $faker->city,
+          'state_id' => $faker->randomDigit,
+            ]);
+        }
+         for ($i = 0; $i < $limit; $i++) {
         
+        DB::table('state')->insert([ //,
+          'name' => $faker->state,
+            'country_id' => $faker->randomDigit,
+            ]);
+        }
+        for ($i = 0; $i < $limit; $i++) {
+        
+        DB::table('country')->insert([ //,
+          'name' => $faker->country,
+           
+            'country_code' => $faker->randomDigit,
+          
+            ]);
+        }
         
     }
 }

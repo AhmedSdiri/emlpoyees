@@ -2,6 +2,16 @@
 @section('action-content')
 
 <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+    
+    <div class="row">
+        <div class="col-sm-8">
+          <h3 class="box-title">List of Devis</h3>
+        </div>
+        <div class="col-sm-4">
+          <a class="btn btn-primary" href="{{ route('devis-management.create') }}">Add new devis</a>
+        </div>
+    </div>
+  </div>
       <div class="row">
         <div class="col-sm-12">
           <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
@@ -42,17 +52,18 @@
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <a href="{{ route('devis-management.edit', ['id' => $devi->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
-                        Update
+                           Update
                         </a>
                          <button type="submit" class="btn btn-danger col-sm-3 col-xs-5 btn-margin">
-                          Delete
+                           Delete
                         </button>
                     </form>
                       
-                  </td>
-            </tr>
-            @endforeach
+                 </td>
+             </tr>
+             @endforeach
             </tbody>
+              
             <tfoot>
               <tr role="row">
                 <th width="6%" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Picture: activate to sort column descending" aria-sort="ascending">ID</th>
