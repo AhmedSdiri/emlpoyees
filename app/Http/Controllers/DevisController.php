@@ -23,7 +23,7 @@ class DevisController extends Controller
            
             ->leftJoin('city', 'devis.ville_de_deces', '=', 'city.name')
             ->select('devis.*')
-            ->paginate(10);
+            ->paginate(5);
          
         
         return view('devis-mgmt.index', ['devis' => $devis]);
@@ -116,7 +116,30 @@ class DevisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $devis = Devis::findOrFail($id);
+        $this->validateInput($request);
+        // Upload image
+        $keys = ['tel' ,
+            'email',
+            'situation',
+            'ville_de_deces',
+            'date_de_deces',
+            'lieu_de_deces',
+            'mode_de_sépulture',
+            'destination_de_defunt',
+            'ceremonie',
+            'option' ,
+            'observation'];
+        $input = $this->createQueryInput($keys, $request);
+        if ($request->file('picture')) {
+            $path = $request->file('picture')->store('avatars');
+            $input['picture'] = $path;
+        }
+
+        Devis::where('id', $id)
+            ->update($input);
+        
+         return redirect()->intended('/devis-management');
     }
 
     /**
@@ -157,5 +180,37 @@ class DevisController extends Controller
         }
 
         return $queryInput;
+    }
+    public function search(Request $request)
+    {
+        $constraints = [
+            
+            'tel' => $request['tel'],
+            'email' => $request['email']
+              
+            ];
+        $devis = $this->doSearchingQuery($constraints);
+        //$constraints['department_name'] = $request['department_name'];
+        return view('devis-mgmt/index', ['devis' => $devis, 'searchingVals' => $constraints]);
+    }
+    private function doSearchingQuery($constraints)
+     {
+        $query = DB::table('devis')
+       /* ->leftJoin('city', 'clients.city_id', '=', 'city.id')
+       
+        ->leftJoin('state', 'clients.state_id', '=', 'state.id')
+        ->leftJoin('country', 'clients.country_id', '=', 'country.id')
+       */
+        ->select( 'devis.*');
+        $fields = array_keys($constraints);
+        $index = 0;
+        foreach ($constraints as $constraint) {
+            if ($constraint != null) {
+                $query = $query->where($fields[$index], 'like', '%'.$constraint.'%');
+            }
+
+            $index++;
+        }
+        return $query->paginate(5);
     }
 }

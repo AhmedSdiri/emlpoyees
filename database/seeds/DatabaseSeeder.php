@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
           'state_id' => $faker->randomDigit,
           'country_id' => $faker->randomDigit,
           'picture'=> $faker->imageUrl($width = 640, $height = 480),
+           
             ]);
         }
         
@@ -54,6 +55,8 @@ class DatabaseSeeder extends Seeder
            'ceremonie' => $faker->randomElement(['aucune ceremonie', 'ceremonie catholique','ceremonie musulmane','ceremonie juive']),
            'option' => $faker->randomElement(['faire-part', 'parution presse','soins de conservation','toilette mortuaire','registre de souvenirs']),
            'observation' => $faker->text($maxNbChars = 200),
+           'etat' => $faker->boolean(50),
+           'traitement' => $faker->boolean(50),
            'start-time' => date('Y-m-d'),
             'deadline' =>date('Y-m-d'),
            

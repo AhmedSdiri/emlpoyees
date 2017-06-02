@@ -7,13 +7,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Update Client</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('client-management.store') }}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('client-management.update',['id' => $client->id])  }}" enctype="multipart/form-data">
+                        
+                         <input type="hidden" name="_method" value="PUT">
+                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        
                           <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
                             <label for="firstname" class="col-md-4 control-label">First Name</label>
 
                             <div class="col-md-6">
-                                <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" required autofocus>
+                                <input id="firstname" type="text" class="form-control" name="firstname" value="{{ $client->firstname }}" required autofocus>
 
                                  @if ($errors->has('firstname'))
                                     <span class="help-block">
@@ -27,7 +30,7 @@
                               <label for="lastname" class="col-md-4 control-label">Last Name</label>
 
                                   <div class="col-md-6">
-                                  <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" required>
+                                  <input id="lastname" type="text" class="form-control" name="lastname" value="{{ $client->lastname }}" required>
 
                                       @if ($errors->has('lastname'))
                                     <span class="help-block">
@@ -41,7 +44,7 @@
                             <label for="emaail" class="col-md-4 control-label">Email</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ $client->email }}" required>
 
                                 @if ($errors->has('address'))
                                     <span class="help-block">
@@ -55,7 +58,7 @@
                             <label for="tel" class="col-md-4 control-label">Tel</label>
 
                             <div class="col-md-6">
-                                <input id="tel" type="text" class="form-control" name="tel" value="{{ old('tel') }}" required>
+                                <input id="tel" type="text" class="form-control" name="tel" value="{{ $client->tel }}" required>
 
                                 @if ($errors->has('tel'))
                                     <span class="help-block">
@@ -99,7 +102,7 @@
                         <div class="form-group">
                             <label for="avatar" class="col-md-4 control-label" >Picture</label>
                             <div class="col-md-6">
-                               <input type="file" id="picture" name="picture" required >
+                               <input type="file" id="picture" name="picture" required value="{{ $client->picture }}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -109,6 +112,7 @@
                                 </button>
                             </div>
                         </div>
+                        
                     </form>
                 </div>
             </div>

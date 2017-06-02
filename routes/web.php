@@ -53,5 +53,6 @@ Route::post('client-management/search', 'ClientController@search')->name('client
 //Route::get('client-management.edit', 'ClientController@edit');
 //devis
 Route::resource('devis-management', 'DevisController');
+Route::post('devis-management/search', 'DevisController@search')->name('devis-management.search');
 
 Route::get('avatars/{name}', 'EmployeeManagementController@load');

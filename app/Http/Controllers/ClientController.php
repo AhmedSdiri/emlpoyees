@@ -119,7 +119,56 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = Client::findOrFail($id);
+        $this->validateInput($request);
+        // Upload image
+        $keys = ['lastname',
+            'firstname',  
+            'email',
+            'tel',
+            'city_id',
+            'state_id',
+            'country_id'];
+        $input = $this->createQueryInput($keys, $request);
+        if ($request->file('picture')) {
+            $path = $request->file('picture')->store('avatars');
+            $input['picture'] = $path;
+        }
+
+        Client::where('id', $id)
+            ->update($input);
+
+        return redirect()->intended('/client-management');
+        
+       /* $user = User::findOrFail($id);
+        $constraints = [
+           'lastname' => 'required|max:60',
+            'firstname' => 'required|max:60',  
+            'email' => 'required|max:120',
+            'tel' => 'required',
+            'city_id' => 'required',
+            'state_id' => 'required',
+            'country_id' => 'required'
+            ];
+        $input = [
+            'lastname' => $request['username'],
+            'firstname' => $request['firstname'],
+             'email' => $request['email'],
+             'tel'=> $request['tel'],
+              'city_id' => $request[ 'city_id'],
+             'state_id' => $request['state_id'],
+            'country_id' => $request['country_id'],
+            
+        ];
+       if ($request['password'] != null && strlen($request['password']) > 0) {
+            $constraints['password'] = 'required|min:6|confirmed';
+            $input['password'] =  bcrypt($request['password']);
+        }
+        $this->validate($request, $constraints);
+        Client::where('id', $id)
+            ->update($input);
+        
+        return redirect()->intended('/client-management');*/
     }
 
     /**

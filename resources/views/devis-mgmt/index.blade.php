@@ -11,7 +11,21 @@
           <a class="btn btn-primary" href="{{ route('devis-management.create') }}">Add new devis</a>
         </div>
     </div>
+   
   </div>
+     <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6"></div>
+      </div>
+     
+      <form method="POST" action="{{ route('devis-management.search') }}">
+         {{ csrf_field() }}
+         @component('layouts.search', ['title' => 'Search'])
+          @component('layouts.two-cols-search-row', ['items' => ['Tel','Email'], 
+          'oldVals' => [isset($searchingVals) ? $searchingVals['tel'] : '',  isset($searchingVals) ? $searchingVals['email'] : '']])
+          @endcomponent
+        @endcomponent
+      </form>
       <div class="row">
         <div class="col-sm-12">
           <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
@@ -29,6 +43,7 @@
                   <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Cérémonie</th>
                   <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Option</th>
                   <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Observations</th>
+                  <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Etat</th>
                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Action</th>
               </tr>
             </thead>
@@ -47,15 +62,25 @@
                 <td class="hidden-xs">{{ $devi->ceremonie }}</td>
                 <td class="hidden-xs">{{ $devi->option }}</td>
                 <td class="hidden-xs">{{ $devi->observation }}</td>
+                <td class="hidden-xs"> @if(($devi->etat) == 1)<button type="submit" class="btn btn-info glyphicon glyphicon-eye-open col-sm-5 col-xs-5 btn-margin"></button>
+                                       @else
+                                       <button type="submit" class="btn btn-primary glyphicon glyphicon-eye-close col-sm-5 col-xs-5 btn-margin"></button>  
+                                       @endif
+                                       @if(($devi->traitement) == 1)<button type="submit" class="btn btn-success glyphicon glyphicon-thumbs-up col-sm-5 col-xs-5 btn-margin"></button>
+                                       @else
+                                       <button type="submit" class="btn btn-warning glyphicon glyphicon-thumbs-down col-sm-5 col-xs-5 btn-margin"></button>  
+                                       @endif
+                                     
+                </td>
                   <td>
                     <form class="row" method="POST" action="{{ route('devis-management.destroy', ['id' => $devi->id]) }}" onsubmit = "return confirm('Are you sure?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <a href="{{ route('devis-management.edit', ['id' => $devi->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
-                           Update
+                        <a href="{{ route('devis-management.edit', ['id' => $devi->id]) }}" class="btn btn-warning glyphicon glyphicon-edit col-sm-2 col-xs-2 btn-margin">
+                           
                         </a>
-                         <button type="submit" class="btn btn-danger col-sm-3 col-xs-5 btn-margin">
-                           Delete
+                         <button type="submit" class="btn btn-danger glyphicon glyphicon-trash col-sm-2 col-xs-2 btn-margin">
+                          
                         </button>
                     </form>
                       
@@ -78,11 +103,21 @@
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Cérémonie</th>
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Option</th>
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Observations</th>
+                <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Etat</th>
                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Action</th>
               </tr>
             </tfoot>
           </table>
         </div>
+                <div class="col-sm-5">
+        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to {{count($devis)}} of {{count($devis)}} entries</div>
+        </div>
+        <div class="col-sm-7">
+          <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+            {{ $devis->links() }}
+          </div>
+        </div>
+      </div>
       </div>
      
     </div>

@@ -7,13 +7,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Add new devis</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('devis-management.store') }}" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('devis-management.update', ['id' => $devis->id]) }}" enctype="multipart/form-data">
+                        <input type="hidden" name="_method" value="PATCH">
                         {{ csrf_field() }}
                           <div class="form-group{{ $errors->has('tel') ? ' has-error' : '' }}">
                             <label for="tel" class="col-md-4 control-label">Tel</label>
 
                             <div class="col-md-6">
-                                <input id="tel" type="text" class="form-control" name="tel" value="{{ old('tel') }}" required autofocus>
+                                <input id="tel" type="text" class="form-control" name="tel" value="{{ $devis->tel }}" required autofocus>
 
                                  @if ($errors->has('tel'))
                                     <span class="help-block">
@@ -28,7 +29,7 @@
                             <label for="emaail" class="col-md-4 control-label">Email</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ $devis->email }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -40,7 +41,7 @@
 						<div class="form-group">
                             <label class="col-md-4 control-label">Situation</label>
                              <div class="col-md-6">
-                                <select id="situation" class="form-control" name="situation value="{{ old('situation') }}">
+                                <select id="situation" class="form-control" name="situation">
                                         <option>décés</option>
 										 <option>non décés</option>
                                 </select>
@@ -51,6 +52,7 @@
                             <div class="col-md-6">
                                 <select id="ville_de_deces" class="form-control" name="ville_de_deces">
                                     @foreach ($cities as $city)
+                                       
                                         <option value="{{$city->id}}"> {{ $city->name }} </option>
                                     @endforeach     
                                 </select>
@@ -59,7 +61,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Date de décès</label>
                              <div class="col-md-6">
-                                <input id="date_de_deces" type="date" class="form-control" name="date_de_deces" value="" required>
+                                <input id="date_de_deces" type="date" class="form-control" name="date_de_deces" value="{{ $devis->date_de_deces }}" required>
                             </div>
                         </div>
                            <div class="form-group">
@@ -67,7 +69,7 @@
                             <div class="col-md-6">
                                 <select id="lieu_de_deces" class="form-control" name="lieu_de_deces">
                                     @foreach ($states as $state)
-                                        <option value="{{$state->id}}"> {{ $state->name }} </option>
+                                        <option value="{{$state->id}}">{{ $state->name }}  </option>
                                     @endforeach     
                                 </select>
                             </div>
@@ -77,6 +79,8 @@
                             <label class="col-md-4 control-label">Mode de sépulture</label>
                              <div class="col-md-6">
                                 <select id="mode_de_sépulture" class="form-control" name="mode_de_sépulture">
+                                         
+                                         <option>{{ $devis->mode_de_sépulture }}</option>
                                          <option>inhumation</option>
 										 <option>crémation</option>
                                          <option>rapatriement</option>
@@ -100,6 +104,7 @@
                              <div class="col-md-6">
                                 <select id="ceremonie" class="form-control" name="ceremonie">
                                          
+                                         <option>{{ $devis->ceremonie }} </option>
                                          <option>aucune ceremonie</option>
                                          <option>ceremonie musulmane</option>
 										 <option>ceremonie catholique</option>
@@ -138,6 +143,7 @@
                              <div class="col-md-6">
                                 <select id="option" class="form-control" name="option">
                                          
+                                         <option>{{ $devis->option }} </option>
                                          <option>faire-part</option>
                                          <option>toilette mortuaire</option>
 										 <option>parution presse</option>
@@ -149,7 +155,7 @@
                             <label for="observation" class="col-md-4 control-label">Observations</label>
 
                             <div class="col-md-6">
-                                <input id="obervation" type="textarea" class="form-control" name="observation" value="" required>
+                                <input id="obervation" type="textarea" class="form-control" name="observation" value="{{ $devis->observation }}" required>
 
                                
                             </div>
@@ -157,7 +163,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Create
+                                    Update
                                 </button>
                             </div>
                         </div>

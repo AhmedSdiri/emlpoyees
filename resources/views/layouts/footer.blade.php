@@ -2,8 +2,8 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Anything you want
+      Best Regards
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2017 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>&copy; Meduse Studio 2017 <a href="#">Company</a>.</strong> All rights reserved.
   </footer>

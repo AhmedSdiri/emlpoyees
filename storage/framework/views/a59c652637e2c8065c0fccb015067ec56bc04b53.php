@@ -9,10 +9,10 @@
                         <?php echo e(csrf_field()); ?>
 
                           <div class="form-group<?php echo e($errors->has('firstname') ? ' has-error' : ''); ?>">
-                            <label for="firstname" class="col-md-4 control-label">First Name</label>
+                            <label for="tel" class="col-md-4 control-label">Tel</label>
 
-                            <div class="col-md-6">
-                                <input id="firstname" type="text" class="form-control" name="firstname" value="<?php echo e(old('firstname')); ?>" required autofocus>
+                               <div class="col-md-6">
+                                <input id="tel" type="text" class="form-control" name="firstname" value="<?php echo e(old('firstname')); ?>" required autofocus>
 
                                  <?php if($errors->has('firstname')): ?>
                                     <span class="help-block">
@@ -20,22 +20,9 @@
                                     </span>
                                 <?php endif; ?>
                             </div>
-                         </div>  
+                          </div>  
                         
-                         <div class="form-group<?php echo e($errors->has('lastname') ? ' has-error' : ''); ?>">
-                              <label for="lastname" class="col-md-4 control-label">Last Name</label>
-
-                                  <div class="col-md-6">
-                                  <input id="lastname" type="text" class="form-control" name="lastname" value="<?php echo e(old('lastname')); ?>" required>
-
-                                      <?php if($errors->has('lastname')): ?>
-                                    <span class="help-block">
-                                        <strong><?php echo e($errors->first('lastname')); ?></strong>
-                                    </span>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        
+                       
                         <div class="form-group<?php echo e($errors->has('address') ? ' has-error' : ''); ?>">
                             <label for="emaail" class="col-md-4 control-label">Email</label>
 

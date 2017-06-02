@@ -27,6 +27,8 @@ class CreateDevisTable extends Migration
             $table->enum('ceremonie', array('aucune ceremonie', 'ceremonie catholique','ceremonie musulmane','ceremonie juive'));
             $table->enum('option', array('faire-part', 'parution presse','soins de conservation','toilette mortuaire','registre de souvenirs'));
             $table->string('observation', 260);
+            $table->boolean('etat');
+            $table->boolean('traitement');
             $table->date('start-time')->nullable();
             $table->date('deadline')->nullable();
             $table->timestamps();
