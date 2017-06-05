@@ -30,6 +30,7 @@
     26 => 'App\\Providers\\RouteServiceProvider',
     27 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     28 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    29 => 'MercurySeries\\Flashy\\FlashyServiceProvider',
   ),
   'eager' => 
   array (
@@ -49,6 +50,7 @@
     13 => 'App\\Providers\\RouteServiceProvider',
     14 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     15 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    16 => 'MercurySeries\\Flashy\\FlashyServiceProvider',
   ),
   'deferred' => 
   array (

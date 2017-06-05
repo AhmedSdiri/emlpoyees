@@ -9,6 +9,7 @@ use App\City;
 use App\State;
 use App\Country;
 use App\Client;
+use Flashy;
 
 class ClientController extends Controller
 {
@@ -29,6 +30,7 @@ class ClientController extends Controller
        
      // ->select('clients.*', 'department.name as department_name', 'department.id as department_id', 'division.name as division_name', 'division.id as division_id')
         ->paginate(5);
+        Flashy::success('Message', 'http://your-awesome-link.com');
 
         return view('clients-mgmt/index', ['clients' => $clients]);
         

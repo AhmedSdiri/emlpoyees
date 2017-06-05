@@ -13,6 +13,7 @@
         </div>
     </div>
   </div>
+     @include('flashy::message')   
   <!-- /.box-header -->
   <div class="box-body">
       <div class="row">

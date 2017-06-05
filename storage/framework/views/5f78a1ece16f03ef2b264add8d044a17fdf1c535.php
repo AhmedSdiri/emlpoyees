@@ -12,6 +12,7 @@
         </div>
     </div>
   </div>
+     <?php echo $__env->make('flashy::message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>   
   <!-- /.box-header -->
   <div class="box-body">
       <div class="row">
