@@ -19,6 +19,23 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- User Account Menu -->
+            <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <!-- The user image in the navbar-->
+              
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="glyphicon glyphicon-globe"></span>Notifications<span class="badget"> <?php echo e(count(auth()->user()->notifications)); ?></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                  <a href="">notif 1</a>
+                  <a href="">notif 2</a>
+                  <a href="">notif 3</a>
+              </li>
+                
+            </ul>
+          </li>
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

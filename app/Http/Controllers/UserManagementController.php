@@ -6,8 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
 
+use App\Notifications\RepliedToThread;
+
+ use App\Notifications\InvoicePaid;
+
 class UserManagementController extends Controller
 {
+    
+  
        /**
      * Where to redirect users after registration.
      *
@@ -63,7 +69,11 @@ class UserManagementController extends Controller
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname']
         ]);
-
+        
+   auth()->user()->notify(new RepliedToThread());
+       
+    // auth()->user()->notify(new InvoicePaid);
+        
         return redirect()->intended('/user-management');
     }
 

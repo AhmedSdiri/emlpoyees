@@ -69,6 +69,8 @@ class DevisController extends Controller
           $input = $this->createQueryInput($keys, $request);
           Devis::create($input);
         
+        
+        
           /*Client::create($request->all());
           return redirect('/client-management');*/
         return redirect()->intended('/devis-management');
