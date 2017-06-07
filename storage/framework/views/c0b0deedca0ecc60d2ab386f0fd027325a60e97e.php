@@ -1,6 +1,5 @@
   <!-- Main Header -->
   <header class="main-header">
-
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -19,23 +18,29 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- User Account Menu -->
-            <li class="dropdown user user-menu">
+             <li class="dropdown user user-menu" id="markasread" onclick="$.get('/markAsRead'); ">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
               <!-- The user image in the navbar-->
               
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="glyphicon glyphicon-globe"></span>Notifications<span class="badget"> <?php echo e(count(auth()->user()->notifications)); ?></span>
+              <span class="glyphicon glyphicon-globe"></span>Notifications<span class="badge label-danger"> <?php echo e(count(auth()->user()->unreadNotifications)); ?></span>
             </a>
             <ul class="dropdown-menu" role="menu">
               <li>
-                  <a href="">notif 1</a>
-                  <a href="">notif 2</a>
-                  <a href="">notif 3</a>
+                  <?php $__empty_1 = true; $__currentLoopData = auth()->user()->unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+              <!--    <a href=""><?php echo e($notification->type); ?></a>
+                -->
+                 <?php echo $__env->make('partials.'.snake_case(class_basename($notification->type)), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                  
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                  <a href="">no unread notification</a>
+                  
+                  <?php endif; ?>
               </li>
                 
             </ul>
-          </li>
+            </li>
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

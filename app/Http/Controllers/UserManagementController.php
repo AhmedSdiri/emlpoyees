@@ -9,6 +9,9 @@ use App\User;
 use App\Notifications\RepliedToThread;
 
  use App\Notifications\InvoicePaid;
+ use App\Notifications\UserUpdateNotification;
+
+use Illuminate\Support\Facades\Mail;
 
 class UserManagementController extends Controller
 {
@@ -133,6 +136,8 @@ class UserManagementController extends Controller
         User::where('id', $id)
             ->update($input);
         
+        auth()->user()->notify(new UserUpdateNotification());
+        
         return redirect()->intended('/user-management');
     }
 
@@ -145,7 +150,7 @@ class UserManagementController extends Controller
     public function destroy($id)
     {
         User::where('id', $id)->delete();
-         return redirect()->intended('/user-management');
+        return redirect()->intended('/user-management');
     }
 
     /**
@@ -154,7 +159,8 @@ class UserManagementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      *  @return \Illuminate\Http\Response
      */
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         $constraints = [
             'username' => $request['username'],
             'firstname' => $request['firstname'],
@@ -187,5 +193,15 @@ class UserManagementController extends Controller
         'firstname' => 'required|max:60',
         'lastname' => 'required|max:60'
     ]);
+    }
+    
+    public function sendingMail()
+    {
+         Mail::send('emails.test',['username' => 'Ahmed'],function($message)
+         {
+               dd($message);
+                //var_dump($message);
+               $message->to('1ahmedsdiri@gmail.com', 'SomGuy')->subject("welcome!");
+         });
     }
 }

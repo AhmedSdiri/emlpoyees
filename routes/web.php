@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -56,3 +57,31 @@ Route::resource('devis-management', 'DevisController');
 Route::post('devis-management/search', 'DevisController@search')->name('devis-management.search');
 
 Route::get('avatars/{name}', 'EmployeeManagementController@load');
+
+//databasenotification
+Route::get('/markAsRead',function(){
+    
+    auth()->user()->unreadNotifications->markAsRead();
+});
+
+//mail notification
+/*Route::get('/email', function()
+    
+    {
+     
+          Mail::send('emails.test',['name' => 'Ahmed'],function($message)
+         {
+              $message->to('1ahmedsdiri@gmail.com', 'SomGuy')->subject("welcome!");
+         });
+    
+    });
+
+
+*/
+Route::get('/email','UserManagementController@sendingMail');
+
+
+
+
+
+
