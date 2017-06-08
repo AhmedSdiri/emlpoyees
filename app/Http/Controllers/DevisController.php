@@ -9,6 +9,7 @@ use App\State;
 use App\Country;
 use App\Client;
 use App\Devis;
+use Flashy;
 
 class DevisController extends Controller
 {
@@ -141,6 +142,8 @@ class DevisController extends Controller
         Devis::where('id', $id)
             ->update($input);
         
+        Flashy::success('Devis updated successfully', '#');
+        
          return redirect()->intended('/devis-management');
     }
 
@@ -208,9 +211,9 @@ class DevisController extends Controller
         $index = 0;
         foreach ($constraints as $constraint) {
             if ($constraint != null) {
+              
                 $query = $query->where($fields[$index], 'like', '%'.$constraint.'%');
             }
-
             $index++;
         }
         return $query->paginate(5);

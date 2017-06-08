@@ -64,7 +64,9 @@
                         Update
                         </a>
                          <button type="submit" class="btn btn-danger btn-xs col-sm-3 col-xs-5 btn-margin">
-                          Delete
+                             <a href="<?php echo e(route('client-management.destroy', ['id' => $client->id])); ?>" >
+                                    Delete
+                             </a>
                         </button>
                     </form>
                   </td>

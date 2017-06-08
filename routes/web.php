@@ -13,8 +13,11 @@
 use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
+    
+     Flashy::message('you are logged in!', '#');
     return view('dashboard');
-})->middleware('auth');
+    
+   })->middleware('auth');
 
 Auth::routes();
 
@@ -75,8 +78,6 @@ Route::get('/markAsRead',function(){
          });
     
     });
-
-
 */
 Route::get('/email','UserManagementController@sendingMail');
 

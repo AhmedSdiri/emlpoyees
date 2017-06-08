@@ -74,6 +74,7 @@ class ClientController extends Controller
         
         Client::create($input);
         
+        
           /*Client::create($request->all());
           return redirect('/client-management');*/
         return redirect()->intended('/client-management');
@@ -102,12 +103,15 @@ class ClientController extends Controller
         
         $client = Client::find($id);
         // Redirect to state list if updating state wasn't existed
-        if ($client == null || count($client) == 0) {
+        if ($client == null || count($client) == 0) 
+        {
             return redirect()->intended('/client-management');
         }
-        $cities = City::all();
-        $states = State::all();
-        $countries = Country::all();
+        
+           $cities = City::all();
+           $states = State::all();
+           $countries = Country::all();
+        
         return view('clients-mgmt.edit', ['client' => $client, 'cities' => $cities, 'states' => $states, 'countries' => $countries
         ]);
     }
@@ -139,7 +143,7 @@ class ClientController extends Controller
 
         Client::where('id', $id)
             ->update($input);
-
+        
         return redirect()->intended('/client-management');
         
        /* $user = User::findOrFail($id);
@@ -181,6 +185,7 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
+       
          Client::where('id', $id)->delete();
          return redirect()->intended('/client-management');
     }

@@ -120,9 +120,10 @@
         </div>
       </div>
       </div>
-     
-    </div>
+    </div>*
 
+   <script src="//code.jquery.com/jquery.js"></script>
+   <?php echo $__env->make('flashy::message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('devis-mgmt.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

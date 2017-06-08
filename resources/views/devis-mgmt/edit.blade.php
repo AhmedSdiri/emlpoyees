@@ -162,9 +162,9 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Update
-                                </button>
+                                     <button type="submit" class="btn btn-primary">
+                                       Update
+                                     </button>
                             </div>
                         </div>
                     </form>
@@ -173,4 +173,6 @@
         </div>
     </div>
 </div>
+<script src="//code.jquery.com/jquery.js"></script>
+   @include('flashy::message')
 @endsection
