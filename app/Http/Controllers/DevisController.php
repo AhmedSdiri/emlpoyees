@@ -10,6 +10,7 @@ use App\Country;
 use App\Client;
 use App\Devis;
 use Flashy;
+use ConsoleTVs\Charts\Facades\Charts;
 
 class DevisController extends Controller
 {
@@ -218,4 +219,43 @@ class DevisController extends Controller
         }
         return $query->paginate(5);
     }
+    public function chart()
+    {
+        // $lava = new \Khill\Lavacharts\Lavacharts;
+        //$chart = new ConsoleTVs\Charts\Facades\Charts;
+ 
+    $chart1 = Charts::create('percentage', 'justgage')
+    ->Title('percentage')
+    ->ElementLabel('My nice label')
+    ->Values([65,0,100])
+    ->Responsive(false)
+    ->Height(300)
+    ->Width(0);
+     $chart2 = Charts::create('pie', 'highcharts')
+     ->Title('pie')
+     ->Labels(['First', 'Second', 'Third'])
+     ->Values([5,10,20])
+     ->Dimensions(1000,500)
+     ->Responsive(false);
+        
+     $chart3 = Charts::create('line', 'highcharts')
+    ->Title('line')
+    ->ElementLabel('My nice label')
+      ->Labels(['First', 'Second', 'Third'])
+      ->Values([5,10,20])
+     ->Dimensions(1000,500)
+     ->Responsive(false);
+        
+      $chart4 = Charts::create('geo', 'highcharts')
+     ->Title('geo')
+    ->ElementLabel('My nice label')
+    ->Labels(['ES', 'FR', 'RU'])
+    ->Colors(['#C5CAE9', '#283593'])
+    ->Values([5,10,20])
+    ->Dimensions(1000,500)
+    ->Responsive(false);
+        
+     return view('charts.consoletvs', ['chart1'=>$chart1,'chart2'=>$chart2,'chart3'=>$chart3,'chart4'=>$chart4]);
+    }
+   
 }

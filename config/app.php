@@ -163,14 +163,14 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        /*
-         * Package Service Providers...
+         /*
+          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
 
         /*
          * Application Service Providers...
-         */
+        */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -178,7 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-         MercurySeries\Flashy\FlashyServiceProvider::class,
+        MercurySeries\Flashy\FlashyServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
     ],
 
     /*
@@ -230,6 +231,8 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Flashy' => MercurySeries\Flashy\Flashy::class,
+        'Charts' => ConsoleTVs\Charts\Charts::class,
+        
     ],
 
 ];

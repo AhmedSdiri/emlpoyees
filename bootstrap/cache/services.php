@@ -31,6 +31,7 @@
     27 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     28 => 'Barryvdh\\DomPDF\\ServiceProvider',
     29 => 'MercurySeries\\Flashy\\FlashyServiceProvider',
+    30 => 'ConsoleTVs\\Charts\\ChartsServiceProvider',
   ),
   'eager' => 
   array (
@@ -51,6 +52,7 @@
     14 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     15 => 'Barryvdh\\DomPDF\\ServiceProvider',
     16 => 'MercurySeries\\Flashy\\FlashyServiceProvider',
+    17 => 'ConsoleTVs\\Charts\\ChartsServiceProvider',
   ),
   'deferred' => 
   array (

@@ -58,6 +58,8 @@ Route::post('client-management/search', 'ClientController@search')->name('client
 //devis
 Route::resource('devis-management', 'DevisController');
 Route::post('devis-management/search', 'DevisController@search')->name('devis-management.search');
+Route::get('consoletvs', 'DevisController@chart');
+
 
 Route::get('avatars/{name}', 'EmployeeManagementController@load');
 
