@@ -11,6 +11,10 @@ use App\Country;
 use App\Client;
 use Flashy;
 
+use App\Notifications\ClientCreateNotification;
+use App\Notifications\ClientDeleteNotification;
+use App\Notifications\ClientUpdateNotification;
+
 class ClientController extends Controller
 {
     /**
@@ -48,8 +52,10 @@ class ClientController extends Controller
         $cities = City::all();
         $states = State::all();
         $countries = Country::all();
-       
-        return view('clients-mgmt/create', ['cities' => $cities, 'states' => $states, 'countries' => $countries]);
+        
+        
+        return view('clients-mgmt.create', ['cities' => $cities, 'states' => $states, 'countries' => $countries]);
+        
     }
 
     /**
@@ -74,6 +80,7 @@ class ClientController extends Controller
         
         Client::create($input);
         
+         auth()->user()->notify(new ClientCreateNotification());
         
           /*Client::create($request->all());
           return redirect('/client-management');*/
@@ -100,18 +107,19 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        
+       
         $client = Client::find($id);
+         //dd($client);
         // Redirect to state list if updating state wasn't existed
         if ($client == null || count($client) == 0) 
         {
             return redirect()->intended('/client-management');
         }
-        
+          
            $cities = City::all();
            $states = State::all();
            $countries = Country::all();
-        
+       
         return view('clients-mgmt.edit', ['client' => $client, 'cities' => $cities, 'states' => $states, 'countries' => $countries
         ]);
     }
@@ -143,6 +151,8 @@ class ClientController extends Controller
 
         Client::where('id', $id)
             ->update($input);
+        
+        auth()->user()->notify(new ClientUpdateNotification());
         
         return redirect()->intended('/client-management');
         
@@ -187,13 +197,17 @@ class ClientController extends Controller
     {
        
          Client::where('id', $id)->delete();
+         auth()->user()->notify(new ClientDeleteNotification());
          return redirect()->intended('/client-management');
+        
     }
     public function search(Request $request) {
          $constraints = [
+             
             'firstname' => $request['firstname'],
-              'lastname' => $request['lastname'],
+            'lastname' => $request['lastname'],
             'tel' => $request['tel']
+             
             ];
         $clients = $this->doSearchingQuery($constraints);
         $constraints['department_name'] = $request['department_name'];
@@ -201,8 +215,8 @@ class ClientController extends Controller
     }
       private function doSearchingQuery($constraints) {
         $query = DB::table('clients')
+        
         ->leftJoin('city', 'clients.city_id', '=', 'city.id')
-       
         ->leftJoin('state', 'clients.state_id', '=', 'state.id')
         ->leftJoin('country', 'clients.country_id', '=', 'country.id')
        
@@ -215,7 +229,7 @@ class ClientController extends Controller
             }
 
             $index++;
-        }
+           }
         return $query->paginate(5);
     }
 

@@ -12,8 +12,12 @@ class CreateDevisTable extends Migration
      * @return void
      */
     public function up()
+        
     {
-        Schema::create('devis', function (Blueprint $table) {
+        Schema::create('devis', function (Blueprint $table) 
+        {
+            
+            
             $table->increments('id');
             $table->foreign('id')->references('client_id')->on('client');
             $table->string('tel',60);
@@ -32,6 +36,8 @@ class CreateDevisTable extends Migration
             $table->date('start-time')->nullable();
             $table->date('deadline')->nullable();
             $table->timestamps();
+            
+     
         });
     }
 

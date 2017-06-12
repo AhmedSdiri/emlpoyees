@@ -60,13 +60,11 @@
                     <form class="row" method="POST" action="{{ route('client-management.destroy', ['id' => $client->id]) }}" onsubmit = "return confirm('Are you sure?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <a href="{{ route('client-management.edit', ['id' => $client->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
-                        Update
+                           <a href="{{ route('client-management.edit', ['id' => $client->id]) }}" class="btn btn-warning glyphicon glyphicon-edit col-sm-2 col-xs-2 btn-margin">
+                           
                         </a>
-                         <button type="submit" class="btn btn-danger btn-xs col-sm-3 col-xs-5 btn-margin">
-                             <a href="{{ route('client-management.destroy', ['id' => $client->id]) }}" >
-                                    Delete
-                             </a>
+                         <button type="submit" class="btn btn-danger glyphicon glyphicon-trash col-sm-2 col-xs-2 btn-margin">
+                          
                         </button>
                     </form>
                   </td>

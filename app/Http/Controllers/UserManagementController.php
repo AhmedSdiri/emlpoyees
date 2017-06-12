@@ -9,7 +9,8 @@ use App\User;
 use App\Notifications\RepliedToThread;
 
  use App\Notifications\InvoicePaid;
- use App\Notifications\UserUpdateNotification;
+use App\Notifications\UserUpdateNotification;
+use App\Notifications\UserDeleteNotification;
 
 use Illuminate\Support\Facades\Mail;
 
@@ -150,6 +151,7 @@ class UserManagementController extends Controller
     public function destroy($id)
     {
         User::where('id', $id)->delete();
+          auth()->user()->notify(new UserDeleteNotification());
         return redirect()->intended('/user-management');
     }
 

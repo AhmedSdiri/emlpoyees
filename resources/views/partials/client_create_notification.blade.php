@@ -1,0 +1,1 @@
+<a href=""><strong>{{ $notification->data['user']['username']}}</strong>  created a new client </a>

@@ -26,13 +26,14 @@
                             </div>
                          </div>  
                         
-                         <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
-                              <label for="lastname" class="col-md-4 control-label">Last Name</label>
+                   
+                        <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
+                            <label for="lastname" class="col-md-4 control-label">Last Name</label>
 
-                                  <div class="col-md-6">
-                                  <input id="lastname" type="text" class="form-control" name="lastname" value="{{ $client->lastname }}" required>
+                            <div class="col-md-6">
+                                <input id="lastname" type="text" class="form-control" name="lastname" value="{{ $client->lastname }}" required>
 
-                                      @if ($errors->has('lastname'))
+                                @if ($errors->has('lastname'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('lastname') }}</strong>
                                     </span>

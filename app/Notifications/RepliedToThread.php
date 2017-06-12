@@ -59,8 +59,8 @@ class RepliedToThread extends Notification
     {
       //dd($notifiable);
        return [
-          //  'data' => 'new notification is sent',
-            'AddingTime' => Carbon::now(),
+            'data' => 'new user is created',
+            'CreateUserTime' => Carbon::now(),
             'user' => $notifiable
         ];
     }

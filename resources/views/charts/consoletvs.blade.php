@@ -13,8 +13,13 @@
     <body>
         <center>
            <h1>test2</h1>
+            <div> {!! $chart->render() !!}</div>
             <div> {!! $chart1->render() !!}</div>
+            <div> {!! $chart7->render() !!}</div>
+            <div> {!! $chart8->render() !!}</div>
+            <div> {!! $chart6->render() !!}</div>
             <div> {!! $chart2->render() !!}</div>
+            <div> {!! $chart5->render() !!}</div>
             <div> {!! $chart3->render() !!}</div>
             <div> {!! $chart4->render() !!}</div>
         </center>

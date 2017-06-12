@@ -55,12 +55,16 @@
                     <form class="row" method="POST" action="<?php echo e(route('user-management.destroy', ['id' => $user->id])); ?>" onsubmit = "return confirm('Are you sure?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"> 
-                        Update
+                         <a href="<?php echo e(route('user-management.edit', ['id' => $user->id])); ?>" class="btn btn-warning glyphicon glyphicon-edit col-sm-2 col-xs-2 btn-margin">
+                           
+                         </a>
+                       
                         <?php if($user->username != Auth::user()->username): ?>
-                         <button type="submit" class="btn btn-danger col-sm-3 col-xs-5 btn-margin">
-                          Delete
-                        </button>
+                          <button type="submit" class="btn btn-danger glyphicon glyphicon-trash col-sm-2 col-xs-2 btn-margin">
+            
+                          </button>
                         <?php endif; ?>
+                          
                     </form>
                   </td>
               </tr>

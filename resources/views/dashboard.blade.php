@@ -31,6 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+     {!! ConsoleTVs\Charts\Facades\Charts::assets() !!}
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -105,5 +106,6 @@ desired effect
      fixed layout. -->
      <script src="//code.jquery.com/jquery.js"></script>
             @include('flashy::message')
+  
 </body>
 </html>

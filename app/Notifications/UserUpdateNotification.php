@@ -64,7 +64,8 @@ class UserUpdateNotification extends Notification
     {
       //dd($notifiable);
        return [
-          //  'data' => 'new notification is sent',
+            'data' => 'new user is modified',
+            'UpdateUserTime' => Carbon::now(),
             'user' => $notifiable
         ];
     }

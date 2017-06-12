@@ -10,19 +10,31 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('client-management.store') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                           <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
-                            <label for="tel" class="col-md-4 control-label">Tel</label>
+                            <label for="firstname" class="col-md-4 control-label">First Name</label>
 
-                               <div class="col-md-6">
-                                <input id="tel" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" required autofocus>
+                            <div class="col-md-6">
+                                <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" required autofocus>
 
-                                 @if ($errors->has('firstname'))
+                                @if ($errors->has('firstname'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('firstname') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                          </div>  
-                        
+                        </div>
+                        <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
+                            <label for="lastname" class="col-md-4 control-label">Last Name</label>
+
+                            <div class="col-md-6">
+                                <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" required>
+
+                                @if ($errors->has('lastname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                        
                         <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                             <label for="emaail" class="col-md-4 control-label">Email</label>

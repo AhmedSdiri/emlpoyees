@@ -84,6 +84,15 @@ Route::get('/markAsRead',function(){
 Route::get('/email','UserManagementController@sendingMail');
 
 
+Route::get('data', function () {
+    
+    return ['value' => rand(0,100)];
+    
+     
+});
+
+
+
 
 
 

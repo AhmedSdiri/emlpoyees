@@ -1,0 +1,1 @@
+<a href=""><strong>{{ $notification->data['user']['username']}}</strong>  deleted a new devis </a>

@@ -12,6 +12,15 @@ use App\Devis;
 use Flashy;
 use ConsoleTVs\Charts\Facades\Charts;
 
+use App\Notifications\DevisCreateNotification;
+use App\Notifications\DevisDeleteNotification;
+use App\Notifications\DevisUpdateNotification;
+
+use App\User;
+use App\All;
+
+
+
 class DevisController extends Controller
 {
     /**
@@ -75,6 +84,9 @@ class DevisController extends Controller
         
           /*Client::create($request->all());
           return redirect('/client-management');*/
+        
+        auth()->user()->notify(new DevisCreateNotification());
+        
         return redirect()->intended('/devis-management');
     }
 
@@ -145,6 +157,8 @@ class DevisController extends Controller
         
         Flashy::success('Devis updated successfully', '#');
         
+         auth()->user()->notify(new DevisUpdateNotification());
+        
          return redirect()->intended('/devis-management');
     }
 
@@ -157,10 +171,15 @@ class DevisController extends Controller
     public function destroy($id)
     {
          Devis::where('id', $id)->delete();
+        
+         auth()->user()->notify(new DevisDeleteNotification());
+        
          return redirect()->intended('/devis-management');
     }
      private function validateInput($request) {
-        $this->validate($request, [
+       
+            $this->validate($request, [
+                                       
             'tel' => 'required',
             'email' => 'required|max:120',
             'situation' => 'required',
@@ -218,36 +237,77 @@ class DevisController extends Controller
             $index++;
         }
         return $query->paginate(5);
-    }
+     }
+    
     public function chart()
     {
         // $lava = new \Khill\Lavacharts\Lavacharts;
         //$chart = new ConsoleTVs\Charts\Facades\Charts;
  
-    $chart1 = Charts::create('percentage', 'justgage')
-    ->Title('percentage')
-    ->ElementLabel('My nice label')
-    ->Values([65,0,100])
+         $devis = DB::table('devis')
+           
+            ->leftJoin('city', 'devis.ville_de_deces', '=', 'city.name')
+            ->select('devis.*');
+      //  dd($devis);
+
+    $chart = Charts::database(Devis::all(), 'bar', 'highcharts')
+    ->ElementLabel("Total")
+    ->Dimensions(500, 500)
     ->Responsive(false)
-    ->Height(300)
-    ->Width(0);
-     $chart2 = Charts::create('pie', 'highcharts')
+   ->groupBy('ceremonie');
+        
+     $chart1 = Charts::database(Devis::all(),'bar', 'highcharts')
      ->Title('pie')
      ->Labels(['First', 'Second', 'Third'])
      ->Values([5,10,20])
      ->Dimensions(1000,500)
-     ->Responsive(false);
+     ->Responsive(false)
+     ->groupBy('option');
+         $chart6 = Charts::database(Devis::all(),'bar', 'highcharts')
+     ->Title('pie')
+     ->Labels(['First', 'Second', 'Third'])
+     ->Values([5,10,20])
+     ->Dimensions(1000,500)
+     ->Responsive(false)
+     ->groupBy('destination_de_defunt');
+         $chart5 = Charts::database(Devis::all(),'bar', 'highcharts')
+     ->Title('pie')
+     ->Labels(['First', 'Second', 'Third'])
+     ->Values([5,10,20])
+     ->Dimensions(1000,500)
+     ->Responsive(false)
+     ->groupBy('option');
         
-     $chart3 = Charts::create('line', 'highcharts')
+     $chart2 = Charts::database(Devis::all(),'pie', 'highcharts')
+     ->Title('pie')
+     ->Labels(['First', 'Second', 'Third'])
+     ->Values([5,10,20])
+     ->Dimensions(1000,500)
+     ->Responsive(false)
+     ->groupBy('situation');
+        
+        //REALTIME
+        $chart7 = Charts::realtime(url('data'),1000,'gauge','canvas-gauges')
+            ->Responsive(false)
+            ->Width(0);
+        
+      $chart8 = Charts::realtime(url('data'),1000,'line','highcharts')
+             ->Responsive(false)
+             ->Dimensions(1000,500)
+            ->Width(0);
+      
+        
+     $chart3 = Charts::database(Devis::all(),'line', 'highcharts')
     ->Title('line')
     ->ElementLabel('My nice label')
-      ->Labels(['First', 'Second', 'Third'])
-      ->Values([5,10,20])
+     ->Labels(['First', 'Second', 'Third'])
+     ->Values([5,10,20])
      ->Dimensions(1000,500)
-     ->Responsive(false);
+     ->Responsive(false)
+     ->groupBy('lieu_de_deces');
         
       $chart4 = Charts::create('geo', 'highcharts')
-     ->Title('geo')
+    ->Title('geo')
     ->ElementLabel('My nice label')
     ->Labels(['ES', 'FR', 'RU'])
     ->Colors(['#C5CAE9', '#283593'])
@@ -255,7 +315,7 @@ class DevisController extends Controller
     ->Dimensions(1000,500)
     ->Responsive(false);
         
-     return view('charts.consoletvs', ['chart1'=>$chart1,'chart2'=>$chart2,'chart3'=>$chart3,'chart4'=>$chart4]);
+     return view('charts.consoletvs', ['chart'=>$chart,'chart1'=>$chart1,'chart2'=>$chart2,'chart3'=>$chart3,'chart4'=>$chart4,'chart5'=>$chart5,'chart6'=>$chart6,'chart7'=>$chart7,'chart8'=>$chart8]);
     }
    
 }
