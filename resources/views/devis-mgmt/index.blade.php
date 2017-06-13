@@ -17,7 +17,28 @@
         <div class="col-sm-6"></div>
         <div class="col-sm-6"></div>
       </div>
-     
+     <div class="container">
+      <form class="form-horizontal" role="form" method="POST" action="{{ route('devis-management.exportExcel') }}">
+                
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-primary">
+                  Export to Excel
+                </button>
+            </form>
+      <form class="form-horizontal" role="form" method="POST" action="{{ route('devis-management.downloadExcel') }}">
+                
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-primary">
+                  download to Excel
+                </button>
+            </form>
+         <form class="form-horizontal" role="form" method="POST" action="{{ route('devis-management.importExcel') }}" enctype="multipart/form-data">
+                
+                {{ csrf_field() }}
+                <input type="file" name="import_file" />
+			   <button class="btn btn-primary">Import File</button>
+            </form>
+</div>  
       <form method="POST" action="{{ route('devis-management.search') }}">
          {{ csrf_field() }}
          @component('layouts.search', ['title' => 'Search'])

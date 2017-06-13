@@ -58,10 +58,14 @@ Route::post('client-management/search', 'ClientController@search')->name('client
 //devis
 Route::resource('devis-management', 'DevisController');
 Route::post('devis-management/search', 'DevisController@search')->name('devis-management.search');
-Route::get('consoletvs', 'DevisController@chart');
+
+//Route::get('consoletvs', 'DevisController@chart');
 
 
-Route::get('avatars/{name}', 'EmployeeManagementController@load');
+//datavisualisation
+Route::resource('chart-management', 'DataVisulisation');
+
+
 
 //databasenotification
 Route::get('/markAsRead',function(){
@@ -83,14 +87,10 @@ Route::get('/markAsRead',function(){
 */
 Route::get('/email','UserManagementController@sendingMail');
 
-
-Route::get('data', function () {
-    
-    return ['value' => rand(0,100)];
-    
-     
-});
-
+//EXCEL
+Route::post('devis-management/exportExcell', 'DevisController@exportExcel')->name('devis-management.exportExcel');
+Route::post('devis-management/downloadExcel', 'DevisController@exportExcel')->name('devis-management.downloadExcel');
+Route::post('devis-management/importExcel', 'DevisController@importExcel')->name('devis-management.importExcel');
 
 
 

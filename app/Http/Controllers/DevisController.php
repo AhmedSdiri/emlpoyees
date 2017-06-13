@@ -18,6 +18,10 @@ use App\Notifications\DevisUpdateNotification;
 
 use App\User;
 use App\All;
+use Auth;
+
+use Excel;
+use Illuminate\Support\Facades\Input;
 
 
 
@@ -28,6 +32,101 @@ class DevisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function exportExcel(Request $request) {
+       
+         
+         $this->prepareExportingData($request)->export('xlsx');
+        
+    }
+     private function prepareExportingData($request) 
+     {
+        $author = Auth::user()->username;
+        $employees = $this->getExportingData(['from'=> $request['from'], 'to' => $request['to']]);
+        return Excel::create('report_from_'. $request['from'].'_to_'.$request['to'], function($excel) use($employees, $request, $author) {
+        
+        // Set the title
+        $excel->setTitle('List of hired employees from '. $request['from'].' to '. $request['to']);
+                        
+        // Chain the setters
+        $excel->setCreator($author)
+            ->setCompany('HoaDang');
+
+        // Call them separately
+        $excel->setDescription('The list of hired employees');
+
+        $excel->sheet('Hired_Employees', function($sheet) use($employees) {
+
+        $sheet->fromArray($employees);
+            });
+        });
+    }
+   private function getExportingData($constraints) {
+       
+       
+       return DB::table('devis')
+           
+        ->leftJoin('city', 'devis.ville_de_deces', '=', 'city.name')
+        ->select('devis.*')
+        ->get()
+        ->map(function ($item, $key) {
+        return (array) $item;
+        })
+        ->all();
+       
+    }
+    public function downloadExcel($type)
+	{
+		$data = Devis::get()->toArray();
+		return Excel::create('itsolutionstuff_example', function($excel) use ($data) {
+			$excel->sheet('mySheet', function($sheet) use ($data)
+	        {
+				$sheet->fromArray($data);
+	        });
+		})->download($type);
+	}
+    public function importExcel()
+	{
+        $path = Input::file('import_file')->getRealPath();
+       
+		if(Input::hasFile('import_file')){
+			
+			$data = Excel::load($path, function($reader) {
+			})->get();
+            
+			if(!empty($data) && $data->count()){
+				foreach ($data as $key => $value) {
+                    
+					$insert[] = [
+'id' => $value->id,
+'tel' => $value->tel,
+'email' => $value->email, 
+'situation' => $value->situation, 
+'ville_de_deces' => $value->ville_de_deces,
+'date_de_deces' => $value->date_de_deces,
+'lieu_de_deces' => $value->lieu_de_deces,
+'mode_de_sépulture' => $value->mode_de_sépulture,
+'destination_de_defunt' => $value->destination_de_defunt,
+'ceremonie' => $value->ceremonie, 
+'option' => $value->option, 
+'observation' => $value->observation,
+'etat' => $value->etat, 
+'traitement' => $value->traitement, 
+'start-time' => $value->$value->start-time, 
+'deadline' => $value->deadline, 
+'created_at' => $value->created_at,
+'updated_at' => $value->updated_at
+];
+				}
+               
+				if(!empty($insert)){
+					DB::table('devis')->insert($insert);
+					dd('Insert Record successfully.');
+				}
+			}
+		}
+		return back();
+	}
+
     public function index()
     {
           $devis = DB::table('devis')
@@ -315,7 +414,8 @@ class DevisController extends Controller
     ->Dimensions(1000,500)
     ->Responsive(false);
         
-     return view('charts.consoletvs', ['chart'=>$chart,'chart1'=>$chart1,'chart2'=>$chart2,'chart3'=>$chart3,'chart4'=>$chart4,'chart5'=>$chart5,'chart6'=>$chart6,'chart7'=>$chart7,'chart8'=>$chart8]);
+    return view('charts.consoletvs', ['chart'=>$chart,'chart1'=>$chart1,'chart2'=>$chart2,'chart3'=>$chart3,'chart4'=>$chart4,'chart5'=>$chart5,'chart6'=>$chart6,'chart7'=>$chart7,'chart8'=>$chart8]);
+    
     }
    
 }

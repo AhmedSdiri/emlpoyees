@@ -16,7 +16,31 @@
         <div class="col-sm-6"></div>
         <div class="col-sm-6"></div>
       </div>
-     
+     <div class="container">
+      <form class="form-horizontal" role="form" method="POST" action="<?php echo e(route('devis-management.exportExcel')); ?>">
+                
+                <?php echo e(csrf_field()); ?>
+
+                <button type="submit" class="btn btn-primary">
+                  Export to Excel
+                </button>
+            </form>
+      <form class="form-horizontal" role="form" method="POST" action="<?php echo e(route('devis-management.downloadExcel')); ?>">
+                
+                <?php echo e(csrf_field()); ?>
+
+                <button type="submit" class="btn btn-primary">
+                  download to Excel
+                </button>
+            </form>
+         <form class="form-horizontal" role="form" method="POST" action="<?php echo e(route('devis-management.importExcel')); ?>" enctype="multipart/form-data">
+                
+                <?php echo e(csrf_field()); ?>
+
+                <input type="file" name="import_file" />
+			   <button class="btn btn-primary">Import File</button>
+            </form>
+</div>  
       <form method="POST" action="<?php echo e(route('devis-management.search')); ?>">
          <?php echo e(csrf_field()); ?>
 

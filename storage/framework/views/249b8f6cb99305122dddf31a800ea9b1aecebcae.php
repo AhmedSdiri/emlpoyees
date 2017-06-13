@@ -31,12 +31,12 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-        <li><a href="<?php echo e(url('employee-management')); ?>"><i class="fa fa-link"></i> <span>Employee Management</span></a></li>
+        <li class="active"><a href="/"><i class="fa fa-desktop"></i> <span>Dashboard</span></a></li>
+        <li><a href="<?php echo e(url('employee-management')); ?>"><i class="fa fa-male" aria-hidden="true"></i> <span>Employee Management</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>System Management</span>
+          <a href="#"><i class="fa fa-wrench"></i> <span>System Management</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -48,11 +48,23 @@
             <li><a href="<?php echo e(url('system-management/report')); ?>">Report</a></li>
           </ul>
         </li>
-        <li><a href="<?php echo e(route('user-management.index')); ?>"><i class="fa fa-link"></i> <span>User management</span></a></li>
-           <li><a href="<?php echo e(route('client-management.index')); ?>"><i class="fa fa-link"></i> <span>Client Management</span></a></li>
-          <li><a href="<?php echo e(route('devis-management.index')); ?>"><i class="fa fa-link"></i> <span>Devis Management</span></a></li>
+        <li><a href="<?php echo e(route('user-management.index')); ?>"><i class="fa fa-user" aria-hidden="true"></i><span>User management</span></a></li>
+        <li><a href="<?php echo e(route('client-management.index')); ?>"><i class="fa fa-globe" aria-hidden="true"></i><span>Client Management</span></a></li>
+        <li><a href="<?php echo e(route('devis-management.index')); ?>"><i class="fa fa-link"></i><span>Devis Management</span></a></li>
+          
+        <li class="treeview">
+          <a href="#"><i class="fa fa-area-chart" aria-hidden="true"></i> <span>Data Visualisation</span>
+               <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span></a>
+              <ul class="treeview-menu">
+            <li><a href="<?php echo e(route('chart-management.index')); ?>">Devis Visualisation</a></li>
+            
+          </ul>
+          </li>
+          
         
-      </ul>
+    
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
