@@ -7,7 +7,7 @@
       </h1>
       <ol class="breadcrumb">
         <!-- li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li-->
-        <li class="active">Devis Mangement</li>
+        <li class="active">Reports Mangement</li>
       </ol>
     </section>
     <?php echo $__env->yieldContent('action-content'); ?>

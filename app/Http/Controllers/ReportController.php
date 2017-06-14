@@ -20,7 +20,29 @@ class ReportController extends Controller
     {
         $this->middleware('auth');
     }
+    /* public function searchExcel(Request $request) {
+        $constraints = [
+            'from' => $request['from'],
+            'to' => $request['to']
+        ];
 
+        $employees = DB::table('devis')
+           
+        ->leftJoin('city', 'devis.ville_de_deces', '=', 'city.name')
+        ->select('devis.*')
+        ->get()
+        ->map(function ($item, $key) {
+        return (array) $item;
+        })
+        ->all();
+         $devis = DB::table('devis')
+           
+            ->leftJoin('city', 'devis.ville_de_deces', '=', 'city.name')
+            ->select('devis.*')
+            ->paginate(5);
+         
+        return view('devis-mgmt/index', ['employees' => $employees, 'searchingValsExcel' => $constraints]);
+    }*/
     public function index() {
         date_default_timezone_set('asia/ho_chi_minh');
         $format = 'Y/m/d';

@@ -74,9 +74,9 @@
                             </div>
                         
                         	<div class="form-group">
-                            <label class="col-md-4 control-label">Mode de sépulture</label>
+                            <label class="col-md-4 control-label">Mode de sepulture</label>
                              <div class="col-md-6">
-                                <select id="mode_de_sépulture" class="form-control" name="mode_de_sépulture">
+                                <select id="mode_de_sepulture" class="form-control" name="mode_de_sepulture">
                                          <option>inhumation</option>
 										 <option>crémation</option>
                                          <option>rapatriement</option>

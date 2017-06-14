@@ -50,14 +50,14 @@ class DatabaseSeeder extends Seeder
            'ville_de_deces' => $faker->city,
            'date_de_deces' =>date('Y-m-d'),
            'lieu_de_deces' => $faker->city,
-           'mode_de_sépulture' =>$faker->randomElement(['inhumation', 'crémation','rapatriement']),
+           'mode_de_sepulture' =>$faker->randomElement(['inhumation', 'crémation','rapatriement']),
            'destination_de_defunt' =>$faker->country,
            'ceremonie' => $faker->randomElement(['aucune ceremonie', 'ceremonie catholique','ceremonie musulmane','ceremonie juive']),
            'option' => $faker->randomElement(['faire-part', 'parution presse','soins de conservation','toilette mortuaire','registre de souvenirs']),
            'observation' => $faker->text($maxNbChars = 200),
            'etat' => $faker->boolean(50),
            'traitement' => $faker->boolean(50),
-           'start-time' => date('Y-m-d'),
+           'starttime' => date('Y-m-d'),
             'deadline' =>date('Y-m-d'),
            
            

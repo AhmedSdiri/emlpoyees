@@ -14,6 +14,7 @@ use App\Client;
 use Flashy;
 use ConsoleTVs\Charts\Facades\Charts;
 
+
 class DataVisulisation extends Controller
 {
     /**
@@ -30,7 +31,12 @@ class DataVisulisation extends Controller
            
             ->leftJoin('city', 'devis.ville_de_deces', '=', 'city.name')
             ->select('devis.*');
+        
       //  dd($devis);
+        
+       /* $countries = DB::table('city')
+                   ->select('city.name');
+        dd($countries);*/
 
     $chart = Charts::database(Devis::all(), 'bar', 'highcharts')
     ->ElementLabel("Total")

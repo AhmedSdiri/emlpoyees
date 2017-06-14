@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <!-- li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li-->
-        <li class="active">Devis Mangement</li>
+        <li class="active">Reports Mangement</li>
       </ol>
     </section>
     @yield('action-content')

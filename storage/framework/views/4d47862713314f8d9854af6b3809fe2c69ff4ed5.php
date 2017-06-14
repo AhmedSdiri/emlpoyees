@@ -16,31 +16,8 @@
         <div class="col-sm-6"></div>
         <div class="col-sm-6"></div>
       </div>
-     <div class="container">
-      <form class="form-horizontal" role="form" method="POST" action="<?php echo e(route('devis-management.exportExcel')); ?>">
-                
-                <?php echo e(csrf_field()); ?>
-
-                <button type="submit" class="btn btn-primary">
-                  Export to Excel
-                </button>
-            </form>
-      <form class="form-horizontal" role="form" method="POST" action="<?php echo e(route('devis-management.downloadExcel')); ?>">
-                
-                <?php echo e(csrf_field()); ?>
-
-                <button type="submit" class="btn btn-primary">
-                  download to Excel
-                </button>
-            </form>
-         <form class="form-horizontal" role="form" method="POST" action="<?php echo e(route('devis-management.importExcel')); ?>" enctype="multipart/form-data">
-                
-                <?php echo e(csrf_field()); ?>
-
-                <input type="file" name="import_file" />
-			   <button class="btn btn-primary">Import File</button>
-            </form>
-</div>  
+        
+   
       <form method="POST" action="<?php echo e(route('devis-management.search')); ?>">
          <?php echo e(csrf_field()); ?>
 
@@ -62,7 +39,7 @@
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Birthdate: activate to sort column ascending">Ville de décès </th>
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="HiredDate: activate to sort column ascending">Date de décès</th>
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Department: activate to sort column ascending">Lieu de décès</th>
-                <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Mode de sépulture</th>
+                <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Mode de sepulture</th>
                   <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Destination de Défunt</th>
                   <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Cérémonie</th>
                   <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Option</th>
@@ -81,7 +58,7 @@
                 <td class="hidden-xs"><?php echo e($devi->ville_de_deces); ?></td>
                 <td class="hidden-xs"><?php echo e($devi->date_de_deces); ?></td>
                 <td class="hidden-xs"><?php echo e($devi->lieu_de_deces); ?></td>
-                <td class="hidden-xs"><?php echo e($devi->mode_de_sépulture); ?></td>
+                <td class="hidden-xs"><?php echo e($devi->mode_de_sepulture); ?></td>
                 <td class="hidden-xs"><?php echo e($devi->destination_de_defunt); ?></td>
                 <td class="hidden-xs"><?php echo e($devi->ceremonie); ?></td>
                 <td class="hidden-xs"><?php echo e($devi->option); ?></td>
@@ -122,7 +99,7 @@
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Birthdate: activate to sort column ascending">Ville de décès </th>
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="HiredDate: activate to sort column ascending">Date de décès</th>
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Department: activate to sort column ascending">Lieu de décès</th>
-                <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Mode de sépulture</th>
+                <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Mode de sepulture</th>
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Destination de Défunt</th>
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Cérémonie</th>
                 <th width="6%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Option</th>

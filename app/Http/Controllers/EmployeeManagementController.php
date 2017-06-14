@@ -79,6 +79,7 @@ class EmployeeManagementController extends Controller
         Employee::create($input);
 
         return redirect()->intended('/employee-management');
+        dd('employee is created successfully');
     }
 
     /**

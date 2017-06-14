@@ -58,9 +58,10 @@
               <i class="fa fa-angle-right pull-right"></i>
             </span></a>
               <ul class="treeview-menu">
-            <li><a href="<?php echo e(route('chart-management.index')); ?>">Devis Visualisation</a></li>
+                  <li><a href="<?php echo e(route('chart-management.index')); ?>">Devis Visualisation</a></li>
+                  <li><a href="<?php echo e(route('reports-management.index')); ?>">Devis Report</a></li>
             
-          </ul>
+              </ul>
           </li>
           
         

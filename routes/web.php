@@ -87,10 +87,20 @@ Route::get('/markAsRead',function(){
 */
 Route::get('/email','UserManagementController@sendingMail');
 
-//EXCEL
+//DEVIS EXCEL
+/*
 Route::post('devis-management/exportExcell', 'DevisController@exportExcel')->name('devis-management.exportExcel');
 Route::post('devis-management/downloadExcel', 'DevisController@exportExcel')->name('devis-management.downloadExcel');
-Route::post('devis-management/importExcel', 'DevisController@importExcel')->name('devis-management.importExcel');
+Route::post('devis-management/importExcel', 'DevisController@importExcel')->name('devis-management.importExcel');*/
+
+
+//ReportDevisController
+Route::resource('reports-management', 'ReportDevisController');
+Route::post('reports-management/search', 'ReportDevisController@search')->name('reports-management.search');
+Route::post('reports-management/exportExcell', 'ReportDevisController@exportExcel')->name('reports-management.exportExcel');
+Route::post('reports-management/downloadExcel', 'ReportDevisController@exportExcel')->name('reports-management.exportExcel');
+Route::post('reports-management/importExcel', 'ReportDevisController@importExcel')->name('reports-management.importExcel');
+
 
 
 
