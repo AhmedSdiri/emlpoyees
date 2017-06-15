@@ -16,6 +16,13 @@
 			  <input type="file" name="import_file" />
 			  <button class="btn btn-primary">Import File</button>
 		</form>
+          <form class="form-horizontal" role="form" method="POST" action="{{ route('reports-management.exportPDF') }}">
+                {{ csrf_field() }}
+               
+                <button type="submit" class="btn btn-primary">
+                 export pdf
+                </button>
+            </form>
     
        <form method="POST" action="{{ route('devis-management.search') }}">
          {{ csrf_field() }}

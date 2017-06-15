@@ -64,6 +64,7 @@ Route::post('devis-management/search', 'DevisController@search')->name('devis-ma
 
 //datavisualisation
 Route::resource('chart-management', 'DataVisulisation');
+Route::post('chart-management', 'DataVisulisation@filter')->name('devis-management.filter');
 
 
 
@@ -100,6 +101,7 @@ Route::post('reports-management/search', 'ReportDevisController@search')->name('
 Route::post('reports-management/exportExcell', 'ReportDevisController@exportExcel')->name('reports-management.exportExcel');
 Route::post('reports-management/downloadExcel', 'ReportDevisController@exportExcel')->name('reports-management.exportExcel');
 Route::post('reports-management/importExcel', 'ReportDevisController@importExcel')->name('reports-management.importExcel');
+Route::post('reports-management/exportPDF', 'ReportDevisController@exportPDF')->name('reports-management.exportPDF');
 
 
 

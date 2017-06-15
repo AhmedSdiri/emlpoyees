@@ -13,6 +13,7 @@ use App\Country;
 use App\Client;
 use Flashy;
 use ConsoleTVs\Charts\Facades\Charts;
+use Illuminate\Support\Facades\Input;
 
 
 class DataVisulisation extends Controller
@@ -38,11 +39,11 @@ class DataVisulisation extends Controller
                    ->select('city.name');
         dd($countries);*/
 
-    $chart = Charts::database(Devis::all(), 'bar', 'highcharts')
+     $chart = Charts::database(Devis::all(), 'bar', 'highcharts')
     ->ElementLabel("Total")
     ->Dimensions(500, 500)
     ->Responsive(false)
-   ->groupBy('ceremonie');
+    ->groupBy('ceremonie');
         
      $chart1 = Charts::database(Devis::all(),'bar', 'highcharts')
      ->Title('pie')
@@ -105,6 +106,18 @@ class DataVisulisation extends Controller
         
     return view('charts-mgmt.consoletvs', ['chart'=>$chart,'chart1'=>$chart1,'chart2'=>$chart2,'chart3'=>$chart3,'chart4'=>$chart4,'chart5'=>$chart5,'chart6'=>$chart6,'chart7'=>$chart7,'chart8'=>$chart8]);
     
+    }
+    public function filter()
+    {
+         $param = Input::get('param');
+        
+         $chart = Charts::database(Devis::all(), 'bar', 'highcharts')
+    ->ElementLabel("Total")
+    ->Dimensions(500, 500)
+    ->Responsive(false)
+    ->groupBy($param);
+        
+        return view('charts-mgmt.filtered', ['chart'=>$chart,'param' => $param]);
     }
     
 

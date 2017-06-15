@@ -34,6 +34,19 @@
                 class="glyphicon glyphicon-th"></span>Grid</a>
         </div>
     </div>
+         <form class="form-horizontal" role="form" method="POST" action="{{ route('devis-management.filter') }}">
+                {{ csrf_field() }}
+              <select class="selectpicker" data-live-search="true" name="param">
+                                         <option>ceremonie</option>
+										 <option>situation</option>
+                                         <option>option</option>
+                                         <option>mode_de_sepulture</option>
+                                </select>
+                <button type="submit" class="btn btn-default">
+                 OK
+                </button>
+            </form>  
+        
     <div id="products" class="row list-group">
         <div class="item  col-xs-4 col-lg-6">
             <div class="thumbnail">

@@ -8,6 +8,7 @@ use App\Devis;
 use Auth;
 use Excel;
 use Illuminate\Support\Facades\Input;
+use PDF;
 
 
 class ReportDevisController extends Controller
@@ -150,7 +151,16 @@ class ReportDevisController extends Controller
 		}
 		return back();
 	}
-
+      public function exportPDF(Request $request) {
+         $constraints = [
+            'from' => $request['from'],
+            'to' => $request['to']
+        ];
+        $devis = $this->getExportingData($constraints);
+        $pdf = PDF::loadView('reports-mgmt/pdf', ['devis' => $devis, 'searchingVals' => $constraints]);
+        return $pdf->download('report_from_'. $request['from'].'_to_'.$request['to'].'pdf');
+        // return view('system-mgmt/report/pdf', ['employees' => $employees, 'searchingVals' => $constraints]);
+    }
 
     /**
      * Show the form for creating a new resource.
