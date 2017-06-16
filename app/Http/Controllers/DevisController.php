@@ -105,7 +105,16 @@ class DevisController extends Controller
      */
     public function show($id)
     {
-        //
+        $devi = Devis::findOrFail($id);
+        
+        
+        if($devi)
+        {
+          $devi->traitement = 1;  
+          $devi->save();
+        }
+       
+         return view('devis-mgmt.show',compact('devi'));
     }
 
     /**
@@ -212,6 +221,16 @@ class DevisController extends Controller
         }
 
         return $queryInput;
+    }
+    public function exportPDF(Request $request) {
+         $constraints = [
+            'from' => $request['from'],
+            'to' => $request['to']
+        ];
+        $devis = $this->getExportingData($constraints);
+        $pdf = PDF::loadView('reports-mgmt/pdf', ['devis' => $devis, 'searchingVals' => $constraints]);
+        return $pdf->download('report_from_'. $request['from'].'_to_'.$request['to'].'pdf');
+        // return view('system-mgmt/report/pdf', ['employees' => $employees, 'searchingVals' => $constraints]);
     }
     public function search(Request $request)
     {

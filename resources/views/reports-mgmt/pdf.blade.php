@@ -25,26 +25,27 @@
   <body>
     <div class="container">
         <div><h2>List of Devis from {{$searchingVals['from']}} to {{$searchingVals['to']}}</h2></div>
-       <table id="example2" role="grid">
+       <table id="example2" role="grid" table table-striped table-condensed>
             <thead>
               <tr role="row">
-                <th width="2%">Id</th>
-                <th width="5%">Tel</th>
-                <th width="10%">Email</th>
-                <th width="5%">vile de deces</th>
-                <th width="5%">date de deces</th>
-                <th width="5%">lieu de deces</th>
-                <th width="5%">destination de defunt</th>
-                <th width="10%">Ceremonie</th>
-                <th width="10%">Option</th>
-                <th width="10%">Obervation</th>
-                <th width="2%">Etat</th>
-                <th width="2%">Traitement</th>
-                <th width="5%">starttime</th>
-                <th width="5%">deadline</th>
+                <th>Id</th>
+                <th>Tel</th>
+                <th>Email</th>
+                <th>vile de deces</th>
+                <th>date de deces</th>
+                <th>lieu de deces</th>
+                <th>destination de defunt</th>
+                <th>Ceremonie</th>
+                <th>Option</th>
+                <th>Obervation</th>
+                <th>Etat</th>
+                <th>Traitement</th>
+                <th>starttime</th>
+                <th>deadline</th>
                   
               </tr>
             </thead>
+           
             <tbody>
             @foreach ($devis as $devi)
                 <tr role="row" class="odd">
@@ -64,8 +65,8 @@
                     <td>{{ $devi['deadline'] }} </td>
               </tr>
             @endforeach
-            </tbody>
-          </table>
+           </tbody>
+        </table>
     </div>
   </body>
 </html>

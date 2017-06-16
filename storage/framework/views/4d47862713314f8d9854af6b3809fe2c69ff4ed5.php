@@ -50,7 +50,49 @@
             </thead>
             <tbody>
             <?php $__currentLoopData = $devis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $devi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <tr role="row" class="odd">
+                <?php if($devi->traitement == 1): ?>
+                <tr role="row" class="odd">   
+                <td  class="sorting_1 bg-success text-white"><?php echo e($devi->id); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->tel); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->email); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->situation); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->ville_de_deces); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->date_de_deces); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->lieu_de_deces); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->mode_de_sepulture); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->destination_de_defunt); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->ceremonie); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->option); ?></td>
+                <td  class="hidden-xs bg-success text-white"><?php echo e($devi->observation); ?></td>
+                <td  class="hidden-xs bg-success text-white"> <?php if(($devi->etat) == 1): ?><button type="submit" class="btn btn-info glyphicon glyphicon-eye-open col-sm-5 col-xs-5 btn-margin"></button>
+                                       <?php else: ?>
+                                       <button type="submit" class="btn btn-primary glyphicon glyphicon-eye-close col-sm-5 col-xs-5 btn-margin"></button>  
+                                       <?php endif; ?>
+                                       <?php if(($devi->traitement) == 1): ?><button type="submit" class="btn btn-success glyphicon glyphicon-thumbs-up col-sm-5 col-xs-5 btn-margin"></button>
+                                       <?php else: ?>
+                                       <button type="submit" class="btn btn-warning glyphicon glyphicon-thumbs-down col-sm-5 col-xs-5 btn-margin"></button>  
+                                       <?php endif; ?>
+                                     
+                </td >
+                  <td class="bg-success text-white">
+                <form class="row" method="POST" action="<?php echo e(route('devis-management.destroy', ['id' => $devi->id])); ?>" onsubmit = "return confirm('Are you sure?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                        <a href="<?php echo e(route('devis-management.show', ['id' => $devi->id])); ?>" class="btn btn-warning glyphicon glyphicon-play col-sm-2 col-xs-2 btn-margin">
+
+                        <a href="<?php echo e(route('devis-management.edit', ['id' => $devi->id])); ?>" class="btn btn-warning glyphicon glyphicon-edit col-sm-2 col-xs-2 btn-margin">
+                           
+                        </a>
+                         <button type="submit" class="btn btn-danger glyphicon glyphicon-trash col-sm-2 col-xs-2 btn-margin">
+                          
+                        </button>
+                    </form>
+                      
+                 </td>
+             </tr>
+                 <?php else: ?>
+                 <tr role="row" class="odd">
+                 
                 <td class="sorting_1"><?php echo e($devi->id); ?></td>
                 <td class="hidden-xs"><?php echo e($devi->tel); ?></td>
                 <td class="hidden-xs"><?php echo e($devi->email); ?></td>
@@ -63,7 +105,8 @@
                 <td class="hidden-xs"><?php echo e($devi->ceremonie); ?></td>
                 <td class="hidden-xs"><?php echo e($devi->option); ?></td>
                 <td class="hidden-xs"><?php echo e($devi->observation); ?></td>
-                <td class="hidden-xs"> <?php if(($devi->etat) == 1): ?><button type="submit" class="btn btn-info glyphicon glyphicon-eye-open col-sm-5 col-xs-5 btn-margin"></button>
+                <td class="hidden-xs"> 
+                <?php if(($devi->etat) == 1): ?><button type="submit" class="btn btn-info glyphicon glyphicon-eye-open col-sm-5 col-xs-5 btn-margin"></button>
                                        <?php else: ?>
                                        <button type="submit" class="btn btn-primary glyphicon glyphicon-eye-close col-sm-5 col-xs-5 btn-margin"></button>  
                                        <?php endif; ?>
@@ -77,6 +120,8 @@
                     <form class="row" method="POST" action="<?php echo e(route('devis-management.destroy', ['id' => $devi->id])); ?>" onsubmit = "return confirm('Are you sure?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                        <a href="<?php echo e(route('devis-management.show', ['id' => $devi->id])); ?>" class="btn btn-warning glyphicon glyphicon-play col-sm-2 col-xs-2 btn-margin">
+
                         <a href="<?php echo e(route('devis-management.edit', ['id' => $devi->id])); ?>" class="btn btn-warning glyphicon glyphicon-edit col-sm-2 col-xs-2 btn-margin">
                            
                         </a>
@@ -87,6 +132,7 @@
                       
                  </td>
              </tr>
+                 <?php endif; ?>
              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
               
@@ -120,8 +166,9 @@
           </div>
         </div>
       </div>
+
       </div>
-    </div>*
+    </div>
 
    <script src="//code.jquery.com/jquery.js"></script>
    <?php echo $__env->make('flashy::message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -50,7 +50,49 @@
             </thead>
             <tbody>
             @foreach ($devis as $devi)
-            <tr role="row" class="odd">
+                @if($devi->traitement == 1)
+                <tr role="row" class="odd">   
+                <td  class="sorting_1 bg-success text-white">{{ $devi->id }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->tel }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->email }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->situation }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->ville_de_deces }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->date_de_deces }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->lieu_de_deces }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->mode_de_sepulture }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->destination_de_defunt }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->ceremonie }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->option }}</td>
+                <td  class="hidden-xs bg-success text-white">{{ $devi->observation }}</td>
+                <td  class="hidden-xs bg-success text-white"> @if(($devi->etat) == 1)<button type="submit" class="btn btn-info glyphicon glyphicon-eye-open col-sm-5 col-xs-5 btn-margin"></button>
+                                       @else
+                                       <button type="submit" class="btn btn-primary glyphicon glyphicon-eye-close col-sm-5 col-xs-5 btn-margin"></button>  
+                                       @endif
+                                       @if(($devi->traitement) == 1)<button type="submit" class="btn btn-success glyphicon glyphicon-thumbs-up col-sm-5 col-xs-5 btn-margin"></button>
+                                       @else
+                                       <button type="submit" class="btn btn-warning glyphicon glyphicon-thumbs-down col-sm-5 col-xs-5 btn-margin"></button>  
+                                       @endif
+                                     
+                </td >
+                  <td class="bg-success text-white">
+                <form class="row" method="POST" action="{{ route('devis-management.destroy', ['id' => $devi->id]) }}" onsubmit = "return confirm('Are you sure?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <a href="{{ route('devis-management.show', ['id' => $devi->id]) }}" class="btn btn-warning glyphicon glyphicon-play col-sm-2 col-xs-2 btn-margin">
+
+                        <a href="{{ route('devis-management.edit', ['id' => $devi->id]) }}" class="btn btn-warning glyphicon glyphicon-edit col-sm-2 col-xs-2 btn-margin">
+                           
+                        </a>
+                         <button type="submit" class="btn btn-danger glyphicon glyphicon-trash col-sm-2 col-xs-2 btn-margin">
+                          
+                        </button>
+                    </form>
+                      
+                 </td>
+             </tr>
+                 @else
+                 <tr role="row" class="odd">
+                 
                 <td class="sorting_1">{{ $devi->id }}</td>
                 <td class="hidden-xs">{{ $devi->tel }}</td>
                 <td class="hidden-xs">{{ $devi->email }}</td>
@@ -63,7 +105,8 @@
                 <td class="hidden-xs">{{ $devi->ceremonie }}</td>
                 <td class="hidden-xs">{{ $devi->option }}</td>
                 <td class="hidden-xs">{{ $devi->observation }}</td>
-                <td class="hidden-xs"> @if(($devi->etat) == 1)<button type="submit" class="btn btn-info glyphicon glyphicon-eye-open col-sm-5 col-xs-5 btn-margin"></button>
+                <td class="hidden-xs"> 
+                @if(($devi->etat) == 1)<button type="submit" class="btn btn-info glyphicon glyphicon-eye-open col-sm-5 col-xs-5 btn-margin"></button>
                                        @else
                                        <button type="submit" class="btn btn-primary glyphicon glyphicon-eye-close col-sm-5 col-xs-5 btn-margin"></button>  
                                        @endif
@@ -77,6 +120,8 @@
                     <form class="row" method="POST" action="{{ route('devis-management.destroy', ['id' => $devi->id]) }}" onsubmit = "return confirm('Are you sure?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <a href="{{ route('devis-management.show', ['id' => $devi->id]) }}" class="btn btn-warning glyphicon glyphicon-play col-sm-2 col-xs-2 btn-margin">
+
                         <a href="{{ route('devis-management.edit', ['id' => $devi->id]) }}" class="btn btn-warning glyphicon glyphicon-edit col-sm-2 col-xs-2 btn-margin">
                            
                         </a>
@@ -87,6 +132,7 @@
                       
                  </td>
              </tr>
+                 @endif
              @endforeach
             </tbody>
               
@@ -119,8 +165,9 @@
           </div>
         </div>
       </div>
+
       </div>
-    </div>*
+    </div>
 
    <script src="//code.jquery.com/jquery.js"></script>
    @include('flashy::message')
