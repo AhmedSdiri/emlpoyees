@@ -3,7 +3,50 @@
 
 
 @section('action-content')
-
+<script type="text/javascript">
+        function addLabel(){
+           var div = document.getElementById('div_quotes');
+             div.innerHTML += "\n<br />";
+            /*div.innerHTML += " <label>Label</label>"+"<input type=text>";
+            div.innerHTML += "<label>Prix</label>"+"<input type=text>";
+            div.innerHTML += "<text name='price'/>";
+            div.innerHTML += "\n<br />";*/
+            div.innerHTML += 
+                "<div class=+"+"row"+">"
+                +"<div class="+"col-xs-12 table-responsive"+">"
+                +"<table class="+"table table-striped"+">"
+                +"<thead>"
+                +"<tr>"
+                +"<th>Service</th>"
+                +"<th>Price</th>"
+                +"</tr>"
+                +"</thead>"
+                +"<tbody>"
+                +"<tr>"
+                +"<td>"
+                +"<label>Service</label>"
+                +"<input type=text id=service name=service>"
+                +"</td>"
+                +"<td>"
+                +"<label>Price</label>"
+                +"<input type=text id=price name=price>"
+                +"</td>"
+                +"</tr>"
+                +"</tbody>"
+                +"</table>"
+                +"</div>"
+                +"</div>";
+        /*    document.getElementById("Button").innerHTML='<form action="add.php" method="post" onSubmit="track(\'P1\');">'+
+'<input type="hidden" name="add" value="true"> '+
+'<input type="hidden" name="item" value="P1"> '+
+'<input type="hidden" name="pID" value="3"> '+
+'<input type="hidden" name="qty" value="1"> '+      
+'<input name="image" type="image" onMouseOver="this.src=\'/img/shop/r_addbasket.png\'" '+
+'onMouseOut="this.src=\'/img/shop/addbasket.png\'" '+
+'value="Add to Basket" src="/img/shop/addbasket.png" alt="AddtoBasket"></form>';*/
+            
+        }
+    </script>
 
 <div class="row">
      <div class="col-md-6 col-md-offset-3">  
@@ -66,30 +109,53 @@
                                 <b>Situation:</b>{{ $devi->mode_de_sepulture }}
                             </div><!-- /.col -->
                         </div><!-- /.row -->
-
+        
+           
+           
+            
+            <form mehod="post" action="{{ route('label',$devi->id) }}">
+                 <div id="div_quotes">
+                 <a class="fa fa-plus" aria-hidden="true" type="button" onClick="addLabel();"></a>
+                      
+                <button type="submit" class="btn btn-primary">
+                    submit
+                </button>
+                     </div>
+            </form>
+        
+             
                         <!-- Table row -->
                         <div class="row">
                             <div class="col-xs-12 table-responsive">
+                               
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Qty</th>
-                                            <th>Product</th>
+                                           
+                                            <th>Service</th>
                                              <th>Price</th>
                                             <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         
+                                         @foreach ($accountings as $accounting)
+                                          @if($accounting->account_id == $devi->id)
+                                            
+                                        <tr>
+                                            <td>{{ $accounting->service }}</td>
+                                            <td>{{ $accounting->price }}</td>
+                                            <td> {{ $accounting->price }} </td>
+                                        </tr>    
+                                            
+                                            
                                         
-                                                                                <tr>
-                                            <td>2</td>
-                                            <td>18</td>
-                                            <td>12500</td>
-                                            <td>25000</td>
-                                        </tr>
-                                                                            </tbody>
+                                         @endif
+                                         @endforeach
+                                     </tbody>
                                 </table>
+                                 
+                                
                             </div><!-- /.col -->
                         </div><!-- /.row -->
 
@@ -99,12 +165,12 @@
                                 <p class="lead">Obserations : {{ $devi->observation }}</p>
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th>Total:</th>
-                                                <td> 50000</td>
-                                            </tr>
-                                        </tbody>
+                                    <tbody>
+                                    <tr>
+                                    <th>Total:</th>
+                                    <td>@foreach ($accountings as $accounting)@if($accounting->account_id == $devi->id) {{$accounting->price }} @endif @endforeach</td>
+                                     </tr>
+                                     </tbody>
                                     </table>
                                 </div>
                             </div><!-- /.col -->
@@ -115,7 +181,7 @@
                             <div class="col-xs-12">
                                 <a href="" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
                                 <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
-                                <a href="{{ route('report.pdf') }}" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</a>
+                                <a href="{{ route('pdf',$devi->id) }}" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</a>
                             </div>
                         </div>
                     </section>

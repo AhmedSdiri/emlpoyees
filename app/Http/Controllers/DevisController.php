@@ -22,7 +22,8 @@ use Auth;
 
 use Excel;
 use Illuminate\Support\Facades\Input;
-
+use PDF;
+use App\Accounting;
 
 
 class DevisController extends Controller
@@ -106,15 +107,18 @@ class DevisController extends Controller
     public function show($id)
     {
         $devi = Devis::findOrFail($id);
-        
-        
-        if($devi)
-        {
+        $id = $devi->id;
+         if($devi)
+         {
           $devi->traitement = 1;  
           $devi->save();
-        }
+         }
+         $id_devi = $id;
+          $accountings= Accounting::all();
+          /*$accountings = DB::table('accountings')
+                    ->select('*');*/
        
-         return view('devis-mgmt.show',compact('devi'));
+         return view('devis-mgmt.show',compact('devi','id','accountings'));
     }
 
     /**
@@ -264,7 +268,15 @@ class DevisController extends Controller
         }
         return $query->paginate(5);
      }
-    
+    public function pdf($id)
+    {
+
+      
+        $devi = Devis::findOrFail($id);
+        $pdf = PDF::loadView('devis-mgmt.pdf',compact('devi'));
+        return $pdf->download('file.pdf');
+        
+    }
     public function chart()
     {
         // $lava = new \Khill\Lavacharts\Lavacharts;
@@ -320,12 +332,12 @@ class DevisController extends Controller
       $chart8 = Charts::realtime(url('data'),1000,'line','highcharts')
              ->Responsive(false)
              ->Dimensions(1000,500)
-            ->Width(0);
+             ->Width(0);
       
         
      $chart3 = Charts::database(Devis::all(),'line', 'highcharts')
-    ->Title('line')
-    ->ElementLabel('My nice label')
+     ->Title('line')
+     ->ElementLabel('My nice label')
      ->Labels(['First', 'Second', 'Third'])
      ->Values([5,10,20])
      ->Dimensions(1000,500)
@@ -344,5 +356,29 @@ class DevisController extends Controller
     return view('charts.consoletvs', ['chart'=>$chart,'chart1'=>$chart1,'chart2'=>$chart2,'chart3'=>$chart3,'chart4'=>$chart4,'chart5'=>$chart5,'chart6'=>$chart6,'chart7'=>$chart7,'chart8'=>$chart8]);
     
     }
-   
+   /* public function label(Request $request,$id)
+    {
+         
+        
+        $devi = Devis::findOrFail($id);
+         
+       
+       
+        Accounting::create([
+             
+            'service' => $request['service'],
+            'price' => $request['price']
+            
+        ]);
+        
+      dd('heelo');
+     return view('/devis-mgmt.show',['devi'=>$devi]);
+    }*/
+    private function validateInputAccounting($request) {
+        $this->validate($request, [
+        'service' => 'required|max:60',
+        'prix' => 'required|max:60'
+       
+    ]);
+    }
 }

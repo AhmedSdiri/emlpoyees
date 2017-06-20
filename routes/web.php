@@ -58,7 +58,10 @@ Route::post('client-management/search', 'ClientController@search')->name('client
 //devis
 Route::resource('devis-management', 'DevisController');
 Route::post('devis-management/search', 'DevisController@search')->name('devis-management.search');
+/*Route::post('devis-management/pdf', 'DevisController@pdf')->name('devis-management.pdf');*/
+Route::get('devis-management.pdf/{id}','DevisController@pdf')->name('pdf');
 
+//Route::get('devis-management.label/{id}','DevisController@label')->name('label');
 //Route::get('consoletvs', 'DevisController@chart');
 
 
@@ -102,6 +105,11 @@ Route::post('reports-management/exportExcell', 'ReportDevisController@exportExce
 Route::post('reports-management/downloadExcel', 'ReportDevisController@exportExcel')->name('reports-management.exportExcel');
 Route::post('reports-management/importExcel', 'ReportDevisController@importExcel')->name('reports-management.importExcel');
 Route::post('reports-management/exportPDF', 'ReportDevisController@exportPDF')->name('reports-management.exportPDF');
+
+
+//Accounting
+Route::resource('accounting-management', 'AccountingController');
+Route::get('accounting-management.label/{id}','AccountingController@label')->name('label');
 
 
 

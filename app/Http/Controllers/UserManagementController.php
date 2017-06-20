@@ -206,4 +206,5 @@ class UserManagementController extends Controller
                $message->to('1ahmedsdiri@gmail.com', 'SomGuy')->subject("welcome!");
          });
     }
+     
 }
