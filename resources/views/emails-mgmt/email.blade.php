@@ -1,0 +1,1 @@
+@extends('devis-mgmt.pdf')

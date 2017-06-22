@@ -42,9 +42,12 @@ class AccountingController extends Controller
      /* $total = DB::table('accountings')
             ->where('account_id',$id_devi)       
             ->get();*/
-        $s=0;
-       //  DB::table('users')->where('name', 'John')->value('email');
-     return view('/devis-mgmt.show', ['devi'=>$devi,'accountings'=>$accountings,'s'=>$s]);
+        
+        // $total = DB::table('users')->where('name', 'John')->value('email');
+        
+        //return view('/devis-mgmt.show', ['devi'=>$devi,'accountings'=>$accountings,'total'=>$total]);
+        
+        return view('/devis-mgmt.show', compact('devi','accountings'));
     }
     public function index()
     {

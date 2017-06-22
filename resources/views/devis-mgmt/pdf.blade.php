@@ -3,7 +3,7 @@
  <head>
     <!-- Required meta tags -->
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-     {!! asset ("/bower_components/AdminLTE/dist/js/demo.js") !!}
+     
      
   </head>
  <body>
@@ -14,7 +14,7 @@
             
            
                 <span class="pull-center">
-                  created at {{ $devi->created_at }}
+                  Devis
                 </span>
                 
                </div>
@@ -63,31 +63,39 @@
                         </div><!-- /.row -->
 
                         <!-- Table row -->
-                        <div class="row">
+                       <div class="row">
                             <div class="col-xs-12 table-responsive">
+                               
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Qty</th>
-                                            <th>Product</th>
+                                           
+                                            <th>Service</th>
                                              <th>Price</th>
                                             <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         
+                                         @foreach ($accountings as $accounting)
+                                          @if($accounting->account_id == $devi->id)
+                                            
+                                        <tr>
+                                            <td>{{ $accounting->service }}</td>
+                                            <td>{{ $accounting->price }}</td>
+                                            <td> {{ $accounting->price }}</td>
+                                        </tr>    
+                                            
+                                            
                                         
-                                                                                <tr>
-                                             <td>2</td>
-                                             <td>18</td>
-                                             <td>12500</td>
-                                             <td>25000</td>
-                                        </tr>
-                                                                            </tbody>
+                                         @endif
+                                         @endforeach
+                                     </tbody>
                                 </table>
+                                 
+                                
                             </div><!-- /.col -->
                         </div><!-- /.row -->
-
                         <div class="row">
                             <!-- accepted payments column -->
                             <div class="col-md-12">
@@ -97,7 +105,7 @@
                                         <tbody>
                                             <tr>
                                                 <th>Total:</th>
-                                                <td> 50000</td>
+                                                <td> {{ $s }}</td>
                                             </tr>
                                         </tbody>
                                     </table>

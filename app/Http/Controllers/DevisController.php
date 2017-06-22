@@ -24,6 +24,9 @@ use Excel;
 use Illuminate\Support\Facades\Input;
 use PDF;
 use App\Accounting;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Mymail;
+
 
 
 class DevisController extends Controller
@@ -44,7 +47,7 @@ class DevisController extends Controller
             ->select('devis.*')
             ->paginate(5);
          
-        
+       
         return view('devis-mgmt.index', ['devis' => $devis]);
     }
 
@@ -115,10 +118,28 @@ class DevisController extends Controller
          }
          $id_devi = $id;
           $accountings= Accounting::all();
+        
+       
+        $var = DB::table('accountings')
+               ->select('price')
+               ->where('account_id', '=', $id)
+               ->get();
+        
+     
+        $taille = count($var);
+        $s =0;
+        for($i=0;$i<$taille;$i++)
+        {
+           //dd($var[$i]->price);
+             $s += $var[$i]->price;
+             $i++;
+        }
+        
+        
           /*$accountings = DB::table('accountings')
                     ->select('*');*/
        
-         return view('devis-mgmt.show',compact('devi','id','accountings'));
+         return view('devis-mgmt.show',compact('devi','id','accountings','var','s'));
     }
 
     /**
@@ -270,10 +291,24 @@ class DevisController extends Controller
      }
     public function pdf($id)
     {
-
+       $var = DB::table('accountings')
+               ->select('price')
+               ->where('account_id', '=', $id)
+               ->get();
+        
+     
+        $taille = count($var);
+        $s =0;
+        for($i=0;$i<$taille;$i++)
+        {
+           //dd($var[$i]->price);
+             $s += $var[$i]->price;
+             $i++;
+        }
       
         $devi = Devis::findOrFail($id);
-        $pdf = PDF::loadView('devis-mgmt.pdf',compact('devi'));
+        $accountings= Accounting::all();
+        $pdf = PDF::loadView('devis-mgmt.pdf',compact('devi','accountings','var','s'));
         return $pdf->download('file.pdf');
         
     }
@@ -380,5 +415,20 @@ class DevisController extends Controller
         'prix' => 'required|max:60'
        
     ]);
+    }
+    public function sendEmail(Request $request,\Illuminate\Support\Facades\Mail $mailer,$id)
+    {
+       
+       // $mailer->to(('abc'))->send(new \App\Mail\Mymail());
+        
+        
+        
+        $devi = Devis::findOrFail($id);
+        $accountings= Accounting::all();
+        //dd($id);
+        Mail::to('admin@gmail.com')->send(new Mymail($devi));
+         dd('success');
+        
+      //  return redirect()->back();
     }
 }

@@ -162,6 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        
 
          /*
           * Package Service Providers...
@@ -180,6 +181,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         MercurySeries\Flashy\FlashyServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
     ],
 
     /*
@@ -232,6 +234,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Flashy' => MercurySeries\Flashy\Flashy::class,
         'Charts' => ConsoleTVs\Charts\Charts::class,
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         
     ],
 
