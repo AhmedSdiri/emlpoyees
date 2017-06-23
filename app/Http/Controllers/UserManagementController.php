@@ -150,9 +150,9 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
-        User::where('id', $id)->delete();
-          auth()->user()->notify(new UserDeleteNotification());
-        return redirect()->intended('/user-management');
+         User::where('id', $id)->delete();
+         auth()->user()->notify(new UserDeleteNotification());
+         return redirect()->intended('/user-management');
     }
 
     /**
@@ -163,7 +163,7 @@ class UserManagementController extends Controller
      */
     public function search(Request $request)
     {
-        $constraints = [
+       $constraints = [
             'username' => $request['username'],
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
@@ -174,11 +174,13 @@ class UserManagementController extends Controller
        return view('users-mgmt/index', ['users' => $users, 'searchingVals' => $constraints]);
     }
 
-    private function doSearchingQuery($constraints) {
+    private function doSearchingQuery($constraints) 
+    {
         $query = User::query();
         $fields = array_keys($constraints);
         $index = 0;
-        foreach ($constraints as $constraint) {
+        foreach ($constraints as $constraint)
+        {
             if ($constraint != null) {
                 $query = $query->where( $fields[$index], 'like', '%'.$constraint.'%');
             }

@@ -20,6 +20,7 @@ class AccountingController extends Controller
          
         
          
+        
         $devi = Devis::findOrFail($id);
         $id_devi = $id;
         Accounting::create([
@@ -29,25 +30,35 @@ class AccountingController extends Controller
             'account_id'=>$id_devi
             
         ]);
-        /*$accountings = DB::table('accountings')
-            ->where('id', '=',$id_devi)       
-            ->get();*/
+        
        
-         /*$accountings = DB::table('accountings')
-                    ->select('*');*/
-         $accountings= Accounting::all();
-       // $results = DB::select( DB::raw("SELECT some('price') FROM accountings WHERE account_id = '$id_devi'") );
-      // $total = DB::table('accountings')->where('account_id', $id_devi)->value('price');
+       $devi = Devis::findOrFail($id);
+        $id = $devi->id;
+         if($devi)
+         {
+          $devi->traitement = 1;  
+          $devi->save();
+         }
+         $id_devi = $id;
+          $accountings= Accounting::all();
         
-     /* $total = DB::table('accountings')
-            ->where('account_id',$id_devi)       
-            ->get();*/
+       
+        $var = DB::table('accountings')
+               ->select('price')
+               ->where('account_id', '=', $id)
+               ->get();
         
-        // $total = DB::table('users')->where('name', 'John')->value('email');
+     
+        $taille = count($var);
+        $s =0;
+        for($i=0;$i<$taille;$i++)
+        {
+           //dd($var[$i]->price);
+             $s += $var[$i]->price;
+             $i++;
+        }
         
-        //return view('/devis-mgmt.show', ['devi'=>$devi,'accountings'=>$accountings,'total'=>$total]);
-        
-        return view('/devis-mgmt.show', compact('devi','accountings'));
+        return view('/devis-mgmt.show', compact('devi','id','accountings','var','s'));
     }
     public function index()
     {
@@ -100,8 +111,40 @@ class AccountingController extends Controller
     public function edit($id)
     {
         
+         
+       $devi = Devis::findOrFail($id);
+       
+        $id = $devi->id;
+          if($devi)
+          {
+              
+           $devi->traitement = 1;  
+           $devi->save();
+              
+          }
+          $id_devi = $id;
+          $accountings= Accounting::all();
+        
+       
+        $var = DB::table('accountings')
+               ->select('price')
+               ->where('account_id', '=', $id)
+               ->get();
+        
+     
+        $taille = count($var);
+        $s =0;
+        for($i=0;$i<$taille;$i++)
+        {
+           //dd($var[$i]->price);
+             $s += $var[$i]->price;
+             $i++;
+        }
+        
+     
+         return view('accountings-mgmt.edit',compact('devi','id','accountings','var','s'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -111,7 +154,8 @@ class AccountingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       dd('success');
+        
     }
 
     /**
@@ -125,6 +169,7 @@ class AccountingController extends Controller
         //
     }
     private function validateInput($request) {
+       
         $this->validate($request, [
         'service' => 'required|max:60',
         'price' => 'required|max:60'

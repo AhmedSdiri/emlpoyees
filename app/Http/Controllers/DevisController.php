@@ -135,9 +135,6 @@ class DevisController extends Controller
              $i++;
         }
         
-        
-          /*$accountings = DB::table('accountings')
-                    ->select('*');*/
        
          return view('devis-mgmt.show',compact('devi','id','accountings','var','s'));
     }
@@ -291,7 +288,9 @@ class DevisController extends Controller
      }
     public function pdf($id)
     {
-       $var = DB::table('accountings')
+        dd('pdf');
+      
+        $var = DB::table('accountings')
                ->select('price')
                ->where('account_id', '=', $id)
                ->get();

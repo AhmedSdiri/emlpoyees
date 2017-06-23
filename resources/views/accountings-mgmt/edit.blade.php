@@ -54,7 +54,35 @@ function deleteButton()
      $('#abc').remove();
      $('#abcd').remove();
 }
-
+function loading()   
+{
+   /* var div = document.getElementById('load'); 
+    div.innerHTML ="<span>Loading</span>"
++"<span class=l-1></span>"
++"<span class=l-2></span>"
++"<span class=l-3></span>"
++"<span class=l-4></span>"
++"<span class=l-5></span>"
++"<span class=l-6></span>";
+    setTimeout(function () {
+  //do something once
+}, 1000);*/
+    var div = document.getElementById('load'); 
+   /* div.innerHTML="<i class=fa fa-spinner fa-spin fa-3x fa-fw>"
+    +"</i>"
+    +"<span class=sr-only>"
+    +"Loading..."
+    +"</span>";*/
+    /*div.replaceWith("<i class=fa fa-spinner fa-spin fa-3x fa-fw>"+"</i>"
+                    "<span class=sr-only>"+"Loading..."+"</span>");*/
+    div.alert("<span>Loading</span>"
+  +"<span class=l-1></span>"
+  +"<span class=l-2></span>"
+  +"<span class=l-3></span>"
+  +"<span class=l-4></span>"
+  +"<span class=l-5></span>"
+  +"<span class=l-6></span>");
+}
 
     </script>
 
@@ -119,12 +147,8 @@ function deleteButton()
                                 <b>Situation:</b>{{ $devi->mode_de_sepulture }}
                             </div><!-- /.col -->
                         </div><!-- /.row -->
-        
-           
-           
-            
+         
             <form mehod="post" action="{{ route('label',$devi->id) }}">
-                  {{ csrf_field() }}
                        <div id="div_quotes">
                         <a class="fa fa-plus" aria-hidden="true" type="button" onClick="addLabel();"></a>
                        </div> 
@@ -191,7 +215,7 @@ function deleteButton()
                             <div class="col-xs-12">
                                 <a href="" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
                                 <a href="{{ route('devis-management.sendEmail',$devi->id) }}" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> send Email</a>
-                                <a ref="{{ route('pdf',$devi->id) }}" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate  PDF</a>
+                                <a ref="{{ route('pdf',$devi->id) }}" class="btn btn-primary pull-right" onClick="loading();" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate  PDF</a>
                        
                             </div>
                         </div>
